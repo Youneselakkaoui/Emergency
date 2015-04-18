@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Emergency</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="to">To</string>
+    <string name="situation">Situation</string>
+    <string name="message">Message d\&apos;alerte</string>
+    <string name="send">Suivant</string>
+    <string name="typeEnvoi">Type d\&apos;envoi</string>
+    <string name="suiviAlerte">Suivie d\&apos;alerte</string>
+    <string name="suiviDemande">Suivie de la demande</string>
+    <string name="persInfo">Info. Personnel</string>
+    <string name="ManageSituation">Gestion situations</string>
+    <string name="addFiles">Joindre fichiers</string>
+    <string name="settings">Settings</string>
+    <string name="sms">SMS</string>
+    <string name="notif">Notification</string>
 </resources>
