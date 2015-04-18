@@ -1,4 +1,4 @@
-package com.emergency.emergency;
+package com.emergency.activities;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
