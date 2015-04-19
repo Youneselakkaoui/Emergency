@@ -1,15 +1,24 @@
 package com.emergency.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
     private SharedPreferences prefs = null;
+    private GridLayout gridLayouts  = null;
+    private TextView[] text         = null;
+    private int item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +30,47 @@ public class MainActivity extends ActionBarActivity {
             Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
             startActivity(goToNextActivity);
         } else {
-            setContentView(R.layout.activity_main);
+            showSituations();
+            //setContentView(R.layout.activity_main);
+            setContentView(gridLayouts);
+            for(item = 0;item < 16; item++) {
+                text[item].setOnClickListener(new View.OnClickListener() {
+
+                    int pos = item;
+
+                    public void onClick(View v) {
+                        Toast.makeText(getBaseContext(), pos + " Clicked",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
 
 
 
+    }
+
+    public void showSituations() {
+        gridLayouts = new GridLayout(MainActivity.this);
+        gridLayouts.setLayoutParams(new GridLayout.LayoutParams());
+
+        gridLayouts.setOrientation(GridLayout.HORIZONTAL);
+
+        gridLayouts.setColumnCount(4);
+
+        gridLayouts.setRowCount(4);
+
+        text = new TextView[16];
+
+        for (int i = 0; i < 16; i++ ) {
+            text[i] = new TextView(MainActivity.this);
+            text[i].setLayoutParams(new GridLayout.LayoutParams());
+            text[i].setText(String.valueOf(i));
+            text[i].setTextSize(25);
+            text[i].setPadding(50, 25, 10, 25);
+            text[i].setText("Situation " + i);
+            gridLayouts.addView(text[i]);
+        }
     }
 
 
@@ -44,18 +89,14 @@ public class MainActivity extends ActionBarActivity {
 
 
         switch (item.getItemId()) {
-            case R.id.:
-                newGame();
-                return true;
-            case R.id.help:
-                showHelp();
+            case R.id.createSituation:
+                Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
+                startActivity(goToNextActivity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

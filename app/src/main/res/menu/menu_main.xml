@@ -10,7 +10,10 @@
         <item android:id="@+id/persInfo"
               android:title="@string/persInfo" />
         <item android:id="@+id/manageSituation"
-              android:title="@string/ManageSituation" />
+            android:title="@string/ManageSituation" />
+        <item android:id="@+id/createSituation"
+            android:title="@string/CreateSituation" />
+
         <item android:id="@+id/settings"
               android:title="@string/settings" />
 
