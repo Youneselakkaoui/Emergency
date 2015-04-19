@@ -9,14 +9,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.emergency.adapter.ImageAdapter;
 
 
 public class MainActivity extends ActionBarActivity {
     private SharedPreferences prefs = null;
-    private GridLayout gridLayouts  = null;
+    private GridView gridView       = null;
+    private RelativeLayout rl;
     private TextView[] text         = null;
     private int item;
 
@@ -30,10 +36,30 @@ public class MainActivity extends ActionBarActivity {
             Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
             startActivity(goToNextActivity);
         } else {
-            showSituations();
-            //setContentView(R.layout.activity_main);
-            setContentView(gridLayouts);
-            for(item = 0;item < 16; item++) {
+            //showSituations();
+            setContentView(R.layout.activity_main);
+
+            GridView gridView = (GridView) findViewById(R.id.grid_view);
+
+            // Instance of ImageAdapter Class
+            gridView.setAdapter(new ImageAdapter(this));
+
+            // On Click event for Single Gridview Item
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v,
+                                        int position, long id) {
+
+                    // Sending image id to FullScreenActivity
+                    Intent i = new Intent(getApplicationContext(), EtatAlerteActivity.class);
+                    // passing array index
+                    i.putExtra("id", position);
+                    startActivity(i);
+                }
+            });
+
+            //setContentView(gridView);
+            /*for(item = 0;item < 16; item++) {
                 text[item].setOnClickListener(new View.OnClickListener() {
 
                     int pos = item;
@@ -43,13 +69,13 @@ public class MainActivity extends ActionBarActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
+            }*/
         }
 
 
 
     }
-
+/*
     public void showSituations() {
         gridLayouts = new GridLayout(MainActivity.this);
         gridLayouts.setLayoutParams(new GridLayout.LayoutParams());
@@ -72,7 +98,7 @@ public class MainActivity extends ActionBarActivity {
             gridLayouts.addView(text[i]);
         }
     }
-
+*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
