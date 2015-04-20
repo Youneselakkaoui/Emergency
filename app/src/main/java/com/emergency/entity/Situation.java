@@ -12,6 +12,16 @@ import java.util.List;
 public class Situation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+    // Table name
+    public static final String TABLE_SITUATION = "situation";
+    // Common column names
+    public static final String SITUATION_KEY_ID         = "id_situation";
+    public static final String SITUATION_ID_EMETTEUR    = "id_emetteur";
+    public static final String SITUATION_TITRE          = "titre";
+    public static final String SITUATION_MESSAGE        = "message";
+    public static final String SITUATION_PIECES_JOINTES = "pieces_jointes";
+    public static final String SITUATION_TYPE_ENVOI     = "type_envoi";
+
 	private int idSituation;
 	private String message;
 	private short piecesJointes;
