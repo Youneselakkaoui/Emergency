@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.emergency.adapter.ImageAdapter;
+import com.emergency.business.DefaultSituationManager;
+import com.emergency.business.SituationManager;
+import com.emergency.entity.Situation;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,10 +28,15 @@ public class MainActivity extends ActionBarActivity {
     private RelativeLayout rl;
     private TextView[] text         = null;
     private int item;
+    private SituationManager situationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        situationManager = new DefaultSituationManager(this);
+
         prefs = getSharedPreferences("com.emergency.app", MODE_PRIVATE);
 
         //Tester est ce qu'il s'agit de premier lancement de l'app
@@ -42,7 +50,14 @@ public class MainActivity extends ActionBarActivity {
             GridView gridView = (GridView) findViewById(R.id.grid_view);
 
             // Instance of ImageAdapter Class
-            gridView.setAdapter(new ImageAdapter(this));
+            for(Situation s : situationManager.getAll()) {
+                TextView txtv = new TextView(this);
+                //txtv.setPadding();
+                txtv.setText(s.getTitre());
+                gridView.addView(txtv);
+            }
+
+            //gridView.setAdapter(new ImageAdapter(this));
 
             // On Click event for Single Gridview Item
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

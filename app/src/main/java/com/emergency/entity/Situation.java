@@ -32,9 +32,18 @@ public class Situation implements Serializable {
 	private User user;
 
 	public Situation() {
+
 	}
 
-	public int getIdSituation() {
+    public Situation(int idSituation, String message, short piecesJointes, String titre, short typeEnvoi) {
+        this.idSituation = idSituation;
+        this.message = message;
+        this.piecesJointes = piecesJointes;
+        this.titre = titre;
+        this.typeEnvoi = typeEnvoi;
+    }
+
+    public int getIdSituation() {
 		return this.idSituation;
 	}
 
