@@ -19,4 +19,24 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_etat_alerte">EtatAlerteActivity</string>
     <string name="etatAlerte">Etat d\alerte</string>
+    <string name="title_activity_manage_user">Infos personnelles</string>
+    <string name="manage_user_saveButton">Save</string>
+    <string name="manage_user_nom">Nom</string>
+    <string name="manage_user_prenom">Prenom</string>
+    <string name="manage_user_birthday">Date de naissance</string>
+    <string name="manage_user_sexe">Sexe</string>
+    <string name="manage_user_male">Homme</string>
+    <string name="manage_user_female">Femme</string>
+    <string name="manage_user_phone">Télephone</string>
+    <string name="manage_user_bloodtype">Groupe sanguin</string>
+    <string-array name="manage_user_bloodtypes">
+        <item>O+</item>
+        <item>O-</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
 </resources>
