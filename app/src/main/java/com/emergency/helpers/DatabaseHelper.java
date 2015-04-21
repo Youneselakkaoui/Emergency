@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                + Situation.SITUATION_PIECES_JOINTES  + ","
                + Situation.SITUATION_TYPE_ENVOI
                + ") VALUES('0654200743', 'Incendi',   " +
-               "'ALERTE, HELP ME, I'M HERE !!!!!!!'," +
+               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
                "1, 2);");
 
    }

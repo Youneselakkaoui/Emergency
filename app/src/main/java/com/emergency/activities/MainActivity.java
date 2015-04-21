@@ -24,12 +24,10 @@ import com.emergency.entity.Situation;
 
 public class MainActivity extends ActionBarActivity {
     private SharedPreferences prefs = null;
-    private GridView gridView       = null;
-    private RelativeLayout rl;
-    private TextView[] text         = null;
-    private int item;
+    private GridLayout gridLayout   = null;
+    private TextView[] textViews    = null;
     private SituationManager situationManager;
-
+    private String titre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,47 +42,43 @@ public class MainActivity extends ActionBarActivity {
             Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
             startActivity(goToNextActivity);
         } else {
-            //showSituations();
-            setContentView(R.layout.activity_main);
 
-            GridView gridView = (GridView) findViewById(R.id.grid_view);
+            //
+            gridLayout = new GridLayout(this);
 
-            // Instance of ImageAdapter Class
-            for(Situation s : situationManager.getAll()) {
-                TextView txtv = new TextView(this);
-                //txtv.setPadding();
-                txtv.setText(s.getTitre());
-                gridView.addView(txtv);
+            gridLayout.setOrientation(0);
+            gridLayout.setColumnCount(3);
+            gridLayout.setRowCount(12);
+
+            int lSize = situationManager.getAll().size();
+
+            textViews = new TextView[lSize];
+
+            for(int i =0; i < lSize; i++) {
+                textViews[i] = new TextView(this);
+                textViews[i].setText(situationManager.getAll().get(i).getTitre());
+                textViews[i].setTextSize(25);
+                textViews[i].setPadding(50, 25, 10, 25);
+                gridLayout.addView(textViews[i]);
             }
 
-            //gridView.setAdapter(new ImageAdapter(this));
+            setContentView(gridLayout);
 
-            // On Click event for Single Gridview Item
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View v,
-                                        int position, long id) {
-
-                    // Sending image id to FullScreenActivity
-                    Intent i = new Intent(getApplicationContext(), EtatAlerteActivity.class);
-                    // passing array index
-                    i.putExtra("id", position);
-                    startActivity(i);
-                }
-            });
-
-            //setContentView(gridView);
-            /*for(item = 0;item < 16; item++) {
-                text[item].setOnClickListener(new View.OnClickListener() {
-
-                    int pos = item;
+            for(int i =0; i < lSize; i++)
+            {
+                titre = situationManager.getAll().get(i).getTitre();
+                textViews[i].setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
-                        Toast.makeText(getBaseContext(), pos + " Clicked",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),
+                                       titre + " Clicked",
+                                       Toast.LENGTH_SHORT).show();
+
                     }
                 });
-            }*/
+            }
+            //setContentView(gridView);
+
         }
 
 

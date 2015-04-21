@@ -69,12 +69,25 @@ public class SituationSQLiteDao implements SituationDao{
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        // int id, String message, short piecesJointes, String titre, short typeEnvoi)
+        /*
+        + Situation.SITUATION_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + Situation.SITUATION_ID_EMETTEUR     + " CHAR(20) NOT NULL,"
+   //         "  `id_emetteur` VARCHAR(20) NOT NULL,\n" +
+            + Situation.SITUATION_TITRE           + " CHAR(45) NOT NULL,"
+   //         "  `titre` VARCHAR(45) NOT NULL,\n" +
+            + Situation.SITUATION_MESSAGE         + " TEXT(300),"
+   //         "  `message` TEXT(300) NULL,\n" +
+            + Situation.SITUATION_PIECES_JOINTES  + " SMALLINT(1) NULL, "
+   //         "  `pieces_jointes` SMALLINT(1) NULL,\n" +
+            + Situation.SITUATION_TYPE_ENVOI      + " SMALLINT(1) NULL "
+         */
+        // (int idSituation, String emetteur, String titre, String message, short piecesJointes, short typeEnvoi)
         Situation s = new Situation(Integer.parseInt(cursor.getString(0)),
                                     cursor.getString(1),
-                                    Short.parseShort(cursor.getString(2)),
+                                    cursor.getString(2),
                                     cursor.getString(3),
-                                    Short.parseShort(cursor.getString(4)));
+                                    Short.parseShort(cursor.getString(4)),
+                                    Short.parseShort(cursor.getString(5)));
         // return contact
         return s;
     }
@@ -90,11 +103,20 @@ public class SituationSQLiteDao implements SituationDao{
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
+
+                System.out.println("cursor.getString(0)" +  cursor.getString(0));
+                System.out.println("cursor.getString(1)" +  cursor.getString(1));
+                System.out.println("cursor.getString(2)" +  cursor.getString(2));
+                System.out.println("cursor.getString(3)" +  cursor.getString(3));
+                System.out.println("cursor.getString(4)" +  cursor.getString(4));
+                System.out.println("cursor.getString(5)" +  cursor.getString(5));
+
                 Situation s = new Situation(Integer.parseInt(cursor.getString(0)),
                                             cursor.getString(1),
-                                            Short.parseShort(cursor.getString(2)),
+                                            cursor.getString(2),
                                             cursor.getString(3),
-                                            Short.parseShort(cursor.getString(4)));
+                                            Short.parseShort(cursor.getString(4)),
+                                            Short.parseShort(cursor.getString(5)));
                 // Adding Situation to list
                 list.add(s);
             } while (cursor.moveToNext());
