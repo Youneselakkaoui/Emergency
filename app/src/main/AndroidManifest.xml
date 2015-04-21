@@ -24,6 +24,10 @@
             android:name=".EtatAlerteActivity"
             android:label="@string/title_activity_etat_alerte" >
         </activity>
+        <activity
+            android:name=".ManageUser"
+            android:label="@string/title_activity_manage_user" >
+        </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

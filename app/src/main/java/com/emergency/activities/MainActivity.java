@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.emergency.adapter.ImageAdapter;
+//import com.emergency.adapter.ImageAdapter;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
             GridView gridView = (GridView) findViewById(R.id.grid_view);
 
             // Instance of ImageAdapter Class
-            gridView.setAdapter(new ImageAdapter(this));
+//            gridView.setAdapter(new ImageAdapter(this));
 
             // On Click event for Single Gridview Item
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -113,10 +113,14 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-
+        Intent goToNextActivity = null;
         switch (item.getItemId()) {
             case R.id.createSituation:
-                Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
+                goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
+                startActivity(goToNextActivity);
+                return true;
+            case R.id.persInfo:
+                goToNextActivity = new Intent(getApplicationContext(), ManageUser.class);
                 startActivity(goToNextActivity);
                 return true;
             default:

@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.emergency.emergency.dto.EmergencyDTO;
 import com.emergency.emergency.util.EmergencyConstants;
-import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -54,12 +53,12 @@ public class AsyncTaskClient<PARAMS extends EmergencyDTO> extends AsyncTask<PARA
         urlConnection2.setDoOutput(true);
         urlConnection2.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         urlConnection2.setChunkedStreamingMode(0);
-        Gson gsonObject = new Gson();
+       // Gson gsonObject = new Gson();
             /*
             Creation du stream et ecriture de la requete sous format JSON
              */
             OutputStream out = new BufferedOutputStream(urlConnection2.getOutputStream());
-            out.write(gsonObject.toJson(paramses[0]).getBytes());
+           // out.write(gsonObject.toJson(paramses[0]).getBytes());
             out.flush();
             out.close();
 
@@ -77,7 +76,7 @@ public class AsyncTaskClient<PARAMS extends EmergencyDTO> extends AsyncTask<PARA
             /*
             parsing du resultat en sortie du web service
              */
-            returnedObject = gsonObject.fromJson(line, EmergencyDTO.class);
+         //   returnedObject = gsonObject.fromJson(line, EmergencyDTO.class);
 
         } catch (IOException e) {
             e.printStackTrace();

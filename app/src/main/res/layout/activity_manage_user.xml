@@ -20,17 +20,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nom :"
-                android:id="@+id/txtnom"
+                android:text="@string/manage_user_nom"
+                android:id="@+id/labelnom"
                 android:layout_column="1" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:hint="@string/manage_user_nom"
                 android:ems="7"
-                android:id="@+id/editText3" />
+                android:id="@+id/textNom" />
 
         </TableRow>
 
@@ -45,20 +45,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Prénom :"
-                android:id="@+id/txtprenom"
+                android:text="@string/manage_user_prenom"
+                android:id="@+id/labelprenom"
                 android:layout_column="1" />
-
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/manage_user_prenom"
+                android:ems="10"
+                android:id="@+id/textprenom" />
         </TableRow>
 
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:id="@+id/editText4" />
+
 
         <TableRow
             android:layout_width="fill_parent"
@@ -71,8 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Date Naissance :"
-                android:id="@+id/txtdtnaiss"
+                android:text="@string/manage_user_birthday"
+                android:id="@+id/labeldtnaiss"
                 android:layout_column="1" />
 
             <EditText
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/editText" />
+                android:id="@+id/textDtNaiss" />
 
 
         </TableRow>
@@ -96,8 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Num Téléphone :"
-                android:id="@+id/txttel"
+                android:text="@string/manage_user_phone"
+                android:id="@+id/labeltel"
                 android:layout_column="1" />
 
             <EditText
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/editText2" />
+                android:id="@+id/textTelephone"/>
 
         </TableRow>
 
@@ -123,14 +123,18 @@
                 android:text="Sexe :"
                 android:id="@+id/txthomme"
                 android:layout_column="1" />
-
+<RadioGroup>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Homme"
                 android:id="@+id/radiohomme" />
-
-
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Femme"
+                android:id="@+id/radiofemme" />
+</RadioGroup>
         </TableRow>
 
         <TableRow
@@ -144,17 +148,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=""
-                android:id="@+id/txtvide"
+                android:text="@string/manage_user_bloodtype"
+                android:id="@+id/labelbloodtype"
                 android:layout_column="1" />
 
-            <RadioButton
+            <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Femme"
-                android:id="@+id/radiofemme" />
+                android:id="@+id/bloodtype_spinner"
+                />
 
 
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/save"
+                android:layout_column="2"
+                android:text="@string/manage_user_saveButton"
+                android:clickable="true"
+                android:onClick="saveUser" />
         </TableRow>
 
 

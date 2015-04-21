@@ -21,5 +21,9 @@ public interface EmergencyConstants {
     /**
      * Path pour createUser
      */
-    String CREATE_USER_URL = "EmergencyWeb/service/emergency/createUser";
+    String MANAGE_USER_URL = "http://10.0.2.2:8080/EmergencyWeb/service/emergency/manageUser";
+
+
+
+
 }

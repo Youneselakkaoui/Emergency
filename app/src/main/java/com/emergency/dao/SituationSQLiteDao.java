@@ -1,6 +1,7 @@
 package com.emergency.dao;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.emergency.entity.Situation;
@@ -39,7 +40,8 @@ public class SituationSQLiteDao implements SituationDao{
         values.put(Situation.SITUATION_TYPE_ENVOI, s.getTypeEnvoi());
 
         // insert row
-        return this.dbW.insert(Situation.TABLE_SITUATION, null, values);
+       // return this.dbW.insert(Situation.TABLE_SITUATION, null, values);
+        return 0;
     }
 
     @Override
@@ -54,22 +56,23 @@ public class SituationSQLiteDao implements SituationDao{
 
     @Override
     public Situation select(int id) {
-        Cursor cursor = dbR.query(DatabaseHelper.TABLE_SITUATION,
-                        new String[] {Situation.SITUATION_KEY_ID,
-                                Situation.SITUATION_ID_EMETTEUR,
-                                Situation.SITUATION_TITRE,
-                                Situation.SITUATION_MESSAGE,
-                                Situation.SITUATION_TYPE_ENVOI
-                                Situation.SITUATION_PIECES_JOINTES,
-                        }, Situation.SITUATION_KEY_ID + "=?",
-                        new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+//        Cursor cursor = dbR.query(DatabaseHelper.TABLE_SITUATION,
+//                        new String[] {Situation.SITUATION_KEY_ID,
+//                                Situation.SITUATION_ID_EMETTEUR,
+//                                Situation.SITUATION_TITRE,
+//                                Situation.SITUATION_MESSAGE,
+//                                Situation.SITUATION_TYPE_ENVOI,
+//                                Situation.SITUATION_PIECES_JOINTES
+//                        }, Situation.SITUATION_KEY_ID + "=?",
+//                        new String[] { String.valueOf(id) }, null, null, null, null);
+//        if (cursor != null)
+//            cursor.moveToFirst();
 
-        Situation s = new Situation(Integer.parseInt(cursor.getString(0)),
-                                    cursor.getString(1), cursor.getString(2));
+//        Situation s = new Situation(Integer.parseInt(cursor.getString(0)),
+//                                    cursor.getString(1), cursor.getString(2));
         // return contact
-        return s;
+//        return s;
+           return null;
     }
 
     @Override
