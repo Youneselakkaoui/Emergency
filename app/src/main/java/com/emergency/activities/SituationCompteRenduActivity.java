@@ -7,20 +7,19 @@ import android.view.MenuItem;
 
 import com.emergency.activities.R;
 
-public class EtatAlerteActivity extends ActionBarActivity {
+public class SituationCompteRenduActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.etat_alerte_layout);
-
+        setContentView(R.layout.situation_compte_rendu);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_situation_compte_rendu, menu);
         return true;
     }
 
