@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.emergency.adapter.ImageAdapter;
 import com.emergency.business.DefaultSituationManager;
 import com.emergency.business.SituationManager;
 import com.emergency.entity.Situation;
@@ -46,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
             //
             gridLayout = new GridLayout(this);
 
-            gridLayout.setOrientation(0);
+            gridLayout.setOrientation(GridLayout.HORIZONTAL);
             gridLayout.setColumnCount(3);
             gridLayout.setRowCount(12);
 
@@ -121,11 +120,16 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
+        Intent goToNextActivity = null;
 
         switch (item.getItemId()) {
+
             case R.id.createSituation:
-                Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
+                goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
+                startActivity(goToNextActivity);
+                return true;
+            case R.id.persInfo:
+                goToNextActivity = new Intent(getApplicationContext(), ManageUser.class);
                 startActivity(goToNextActivity);
                 return true;
             default:

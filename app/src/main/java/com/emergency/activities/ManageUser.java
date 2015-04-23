@@ -1,11 +1,17 @@
 package com.emergency.activities;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,20 +22,22 @@ import com.emergency.emergency.dto.ManageUserOut;
 import com.emergency.emergency.dto.UserDTO;
 import com.emergency.emergency.util.EmergencyConstants;
 
+import java.util.Calendar;
+
 
 public class ManageUser extends ActionBarActivity implements OnTaskCompleted<ManageUserOut>{
-
+    EditText mEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_user);
         Spinner spinner = (Spinner) findViewById(R.id.bloodtype_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.manage_user_bloodtypes, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
     }
 
@@ -75,6 +83,15 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
         manageUserIn.getUserDTO().setPrenom(String.valueOf(((TextView) findViewById(R.id.textprenom)).getText()));
         //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
         return manageUserIn;
+    }
+
+    public void selectDate(View view) {
+        //DialogFragment newFragment = new SelectDateFragment();
+        //newFragment.show(getFragmentManager(), "DatePicker");
+    }
+    public void populateSetDate(int year, int month, int day) {
+        mEdit = (EditText)findViewById(R.id.textDtNaiss);
+        mEdit.setText(month+"/"+day+"/"+year);
     }
 
 }
