@@ -4,16 +4,27 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.emergency.activities.R;
+import com.emergency.entity.Situation;
 
 public class EtatAlerteActivity extends ActionBarActivity {
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.etat_alerte_layout);
 
+        linearLayout = (LinearLayout) findViewById(R.id.listAlertes);
+        TextView txtV = new TextView(this);
+        Situation s = (Situation) getIntent().getSerializableExtra("Situation");
+        txtV.setText(s.getTitre());
+
+        linearLayout.addView(txtV);
     }
 
 

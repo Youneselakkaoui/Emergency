@@ -21,7 +21,7 @@ public class SituationSQLiteDao implements SituationDao{
 
     public SituationSQLiteDao(Context context) {
 
-        this.databaseHelper = new DatabaseHelper(context);
+        this.databaseHelper = DatabaseHelper.getInstance(context);
         this.dbW = databaseHelper.getWritableDatabase();
         this.dbR = databaseHelper.getReadableDatabase();
     }

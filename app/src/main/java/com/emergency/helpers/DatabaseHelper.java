@@ -21,6 +21,7 @@ import com.emergency.entity.Situation;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
+    private static DatabaseHelper sInstance;
     // Logcat tag
     private static final String LOG = DatabaseHelper.class.getName();
 
@@ -70,6 +71,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                + Situation.SITUATION_MESSAGE         + ","
                + Situation.SITUATION_PIECES_JOINTES  + ","
                + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Help2 !!',   " +
+               "'ALERTE, HELP ME, !!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Help3 !!',   " +
+               "'ALERTE, HELP ME, !!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
                + ") VALUES('0654200743', 'Accedent',   " +
                "'ALERTE, HELP ME,!!!!!!!'," +
                "1, 2);");
@@ -79,7 +98,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                + Situation.SITUATION_MESSAGE         + ","
                + Situation.SITUATION_PIECES_JOINTES  + ","
                + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Accedent 2',   " +
+               "'ALERTE, HELP ME,!!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Accedent 3',   " +
+               "'ALERTE, HELP ME,!!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
                + ") VALUES('0654200743', 'Incendi',   " +
+               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Incendi X',   " +
+               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Incendi 3',   " +
+               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+               "1, 2);");
+       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
+               + Situation.SITUATION_ID_EMETTEUR     + ","
+               + Situation.SITUATION_TITRE           + ","
+               + Situation.SITUATION_MESSAGE         + ","
+               + Situation.SITUATION_PIECES_JOINTES  + ","
+               + Situation.SITUATION_TYPE_ENVOI
+               + ") VALUES('0654200743', 'Incendi 5',   " +
                "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
                "1, 2);");
 
@@ -96,6 +160,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static synchronized DatabaseHelper getInstance(Context context) {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return sInstance;
     }
 
     /**
