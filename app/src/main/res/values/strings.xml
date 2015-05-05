@@ -22,7 +22,7 @@
     <string name="title_activity_manage_user">Infos personnelles</string>
     <string name="manage_user_saveButton">Save</string>
     <string name="manage_user_nom">Nom</string>
-    <string name="manage_user_prenom">Prenom</string>
+    <string name="manage_user_prenom">Prénom</string>
     <string name="manage_user_birthday">Date de naissance</string>
     <string name="manage_user_sexe">Sexe</string>
     <string name="manage_user_male">Homme</string>
@@ -30,6 +30,7 @@
     <string name="manage_user_phone">Télephone</string>
     <string name="manage_user_bloodtype">Groupe sanguin</string>
     <string-array name="manage_user_bloodtypes">
+        <item>Ne sais pas</item>
         <item>O+</item>
         <item>O-</item>
         <item>A+</item>
@@ -39,34 +40,5 @@
         <item>AB+</item>
         <item>AB-</item>
     </string-array>
-    <string-array name="main_menu">
-        <item>Home</item>
-        <item>Suivie d\'alerte</item>
-        <item>Suivie de la demande</item>
-        <item>Info. Personnel</item>
-        <item>Gestion situations</item>
-        <item>Settings</item>
-    </string-array>
-
-    <array name="nav_drawer_icons">
-        <item>@drawable/ic_home</item>
-        <item>@drawable/ic_people</item>
-        <item>@drawable/ic_photos</item>
-        <item>@drawable/ic_communities</item>
-        <item>@drawable/ic_pages</item>
-        <item>@drawable/ic_whats_hot</item>
-    </array>
-
-    <!-- Content Description -->
-    <string name="desc_list_item_icon">Item Icon</string>
-    <string name="title_activity_home">HomeActivity</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
-
-    <string name="action_example">Example action</string>
+    <string name="manage_user_selectdate">Selectionner une date</string>
 </resources>
