@@ -156,4 +156,16 @@ public class HomeActivity extends ActionBarActivity
         super.onDestroy();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*
+        if (prefs.getBoolean("firstRun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            // using the following line to edit/commit prefs
+            prefs.edit().putBoolean("firstRun", false).commit();
+
+        }*/
+    }
 }

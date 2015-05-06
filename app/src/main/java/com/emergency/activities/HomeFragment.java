@@ -1,7 +1,9 @@
 package com.emergency.activities;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -32,7 +34,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements AbsListView.OnScrollListener,AbsListView.OnItemClickListener {
 
     public static final String SAVED_DATA_KEY = "SAVED_DATA";
-
+    private SharedPreferences prefs = null;
     private StaggeredGridView mGridView;
     private boolean mHasRequestedMore;
     private SampleAdapter mAdapter;
@@ -53,20 +55,29 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
 
         situationManager = new DefaultSituationManager(getActivity());
 
-        mGridView = (StaggeredGridView) rootView.findViewById(R.id.grid_view);
+        prefs = getActivity().getSharedPreferences("com.emergency.app", Context.MODE_PRIVATE);
 
-        mAdapter = new SampleAdapter(getActivity(),
-                                     android.R.layout.simple_list_item_1,
-                                     (ArrayList<Situation>)situationManager.getAll());
+        //Tester est ce qu'il s'agit de premier lancement de l'app
 
-        if (mData == null) {
-            mData = (ArrayList<Situation>)situationManager.getAll();
+        if (prefs.getBoolean("firstRun", true)) {
+            Intent goToNextActivity = new Intent(getActivity().getApplicationContext(), SituationActivity.class);
+            startActivity(goToNextActivity);
+        } else {
+
+            mGridView = (StaggeredGridView) rootView.findViewById(R.id.grid_view);
+
+            mAdapter = new SampleAdapter(getActivity(),
+                    android.R.layout.simple_list_item_1,
+                    (ArrayList<Situation>) situationManager.getAll());
+
+            if (mData == null) {
+                mData = (ArrayList<Situation>) situationManager.getAll();
+            }
+
+            mGridView.setAdapter(mAdapter);
+            mGridView.setOnScrollListener(this);
+            mGridView.setOnItemClickListener(this);
         }
-
-        mGridView.setAdapter(mAdapter);
-        mGridView.setOnScrollListener(this);
-        mGridView.setOnItemClickListener(this);
-
         return rootView;
     }
 
@@ -129,5 +140,17 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
         // notify the adapter that we can update now
         mAdapter.notifyDataSetChanged();
         mHasRequestedMore = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (prefs.getBoolean("firstRun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            // using the following line to edit/commit prefs
+            prefs.edit().putBoolean("firstRun", false).commit();
+
+        }
     }
 }

@@ -5,11 +5,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.emergency.adapter.SampleAdapter;
+import com.emergency.adapter.SituationAdapter;
+import com.emergency.business.DefaultSituationManager;
+import com.emergency.business.SituationManager;
+import com.emergency.entity.Situation;
+import com.rey.material.widget.Button;
+
+import java.util.ArrayList;
 
 public class ManageSituation extends Fragment {
-	
-	public ManageSituation(){
+    private SituationManager situationManager;
+    private ArrayList<Situation> situations;
+    private ListView situationsListView;
+    private SituationAdapter mAdapter;
 
+	public ManageSituation(){
+        situationManager = new DefaultSituationManager(getActivity());
     }
 	
 	@Override
@@ -18,8 +33,12 @@ public class ManageSituation extends Fragment {
  
         View rootView = inflater.inflate(R.layout.manage_situation_fragment, container, false);
 
+        situationsListView = (ListView) rootView.findViewById(R.id.situations_list);
 
+        mAdapter = new SituationAdapter(getActivity(), R.layout.row_list_item,
+                (ArrayList<Situation>) situationManager.getAll());
 
+        situationsListView.setAdapter(mAdapter);
 
         return rootView;
     }
