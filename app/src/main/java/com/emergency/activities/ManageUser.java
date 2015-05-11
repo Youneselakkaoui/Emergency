@@ -1,32 +1,53 @@
 package com.emergency.activities;
 
+
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.emergency.business.AsyncWsCaller;
 import com.emergency.business.OnTaskCompleted;
-import com.emergency.emergency.dto.ManageUserIn;
-import com.emergency.emergency.dto.ManageUserOut;
-import com.emergency.emergency.dto.UserDTO;
-import com.emergency.emergency.util.EmergencyConstants;
+import com.emergency.dto.ManageUserIn;
+import com.emergency.dto.ManageUserOut;
+import com.emergency.dto.UserDTO;
+import com.emergency.util.EmergencyConstants;
 
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
-public class ManageUser extends ActionBarActivity implements OnTaskCompleted<ManageUserOut>{
-    EditText mEdit;
+public class ManageUser extends ActionBarActivity implements OnTaskCompleted<ManageUserOut> {
+
+    DateFormat fmtDateAndTime = DateFormat.getDateInstance();
+    TextView lblDateAndTime;
+    Calendar myCalendar = Calendar.getInstance();
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        }
+    };
+
+    private void updateLabel() {
+        lblDateAndTime.setText(fmtDateAndTime.format(myCalendar.getTime()));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +60,23 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        lblDateAndTime = (TextView) findViewById(R.id.textDtNaiss);
+        ImageButton btnDate = (ImageButton) findViewById(R.id.buttonSetDate);
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new DatePickerDialog(ManageUser.this, d, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        TelephonyManager  mTelephonyMgr=(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+
+
+        Logger.getAnonymousLogger().log(Level.INFO,"phone number : ",mTelephonyMgr.getLine1Number());
+        ((TextView) findViewById(R.id.textTelephone)).setText(mTelephonyMgr.getLine1Number());
+// ajouter spinner indicatif pays
     }
 
     @Override
@@ -81,17 +119,11 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
         manageUserIn.getUserDTO().setTelephone(String.valueOf(((TextView) findViewById(R.id.textTelephone)).getText()));
         manageUserIn.getUserDTO().setNom(String.valueOf(((TextView) findViewById(R.id.textNom)).getText()));
         manageUserIn.getUserDTO().setPrenom(String.valueOf(((TextView) findViewById(R.id.textprenom)).getText()));
-        //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
+        manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
         return manageUserIn;
     }
 
-    public void selectDate(View view) {
-        //DialogFragment newFragment = new SelectDateFragment();
-        //newFragment.show(getFragmentManager(), "DatePicker");
-    }
-    public void populateSetDate(int year, int month, int day) {
-        mEdit = (EditText)findViewById(R.id.textDtNaiss);
-        mEdit.setText(month+"/"+day+"/"+year);
-    }
+
+
 
 }

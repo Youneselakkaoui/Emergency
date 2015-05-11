@@ -12,6 +12,20 @@ import java.util.List;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+    // table name
+    public static String TABLE_USER  ="user";
+    //columns
+    public static String USER_TELEPHONE = "telephone";
+    public static String USER_AUTRESINFOS= "autres_infos";
+    public static String USER_CHOLESTEROL = "cholesterol";
+    public static String USER_DATENAISSANCE = "date_naissance";
+    public static String USER_DIABETE = "diabete";
+    public static String USER_GROUPESANGUIN = "groupe_sanguin";
+    public static String USER_NOM = "nom";
+    public static String USER_PRENOM = "prenom";
+    public static String USER_SEXE = "sexe";
+
+
 
 	private String telephone;
 	private String autresInfos;
@@ -29,7 +43,19 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public String getTelephone() {
+    public User(String telephone, String autresInfos, short cholesterol, Date dateNaissance, short diabete, short groupSanguin, String nom, String prenom, short sexe) {
+        this.telephone = telephone;
+        this.autresInfos = autresInfos;
+        this.cholesterol = cholesterol;
+        this.dateNaissance = dateNaissance;
+        this.diabete = diabete;
+        this.groupSanguin = groupSanguin;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+    }
+
+    public String getTelephone() {
 		return this.telephone;
 	}
 

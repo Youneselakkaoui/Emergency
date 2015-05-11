@@ -1,6 +1,4 @@
-package com.emergency.emergency.dto;
-
-import java.io.Serializable;
+package com.emergency.dto;
 
 /**
  * Anomalie retournee par le service Emergency
