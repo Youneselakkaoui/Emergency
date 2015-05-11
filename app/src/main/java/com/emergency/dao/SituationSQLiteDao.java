@@ -21,7 +21,7 @@ public class SituationSQLiteDao implements SituationDao{
 
     public SituationSQLiteDao(Context context) {
 
-        this.databaseHelper = new DatabaseHelper(context);
+        this.databaseHelper = DatabaseHelper.getInstance(context);
         this.dbW = databaseHelper.getWritableDatabase();
         this.dbR = databaseHelper.getReadableDatabase();
     }
@@ -42,7 +42,7 @@ public class SituationSQLiteDao implements SituationDao{
         values.put(Situation.SITUATION_PIECES_JOINTES, s.getPiecesJointes());
         values.put(Situation.SITUATION_TYPE_ENVOI, s.getTypeEnvoi());
 
-        // insert row
+        // insert row_list_item
         return (int)this.dbW.insert(Situation.TABLE_SITUATION, null, values);
     }
 
