@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
+        android:id="@+id/situation_titre"
         android:hint="@string/situation" />
 
     <EditText
@@ -18,7 +19,7 @@
         android:inputType="textMultiLine"
         android:layout_marginBottom="15dp"
         android:ems="10"
-        android:id="@+id/message"
+        android:id="@+id/situation_desc"
         android:gravity="top"
         android:layout_weight="0.85"
         android:hint="@string/message" />
@@ -96,6 +97,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:id="@+id/btn_suivant"
         android:text="@string/send" />
 
 </LinearLayout>

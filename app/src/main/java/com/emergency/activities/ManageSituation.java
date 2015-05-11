@@ -1,6 +1,7 @@
 package com.emergency.activities;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +36,20 @@ public class ManageSituation extends Fragment {
 
         situationsListView = (ListView) rootView.findViewById(R.id.situations_list);
 
+        Button btnAdd = (Button) rootView.findViewById(R.id.add_btn);
+
         mAdapter = new SituationAdapter(getActivity(), R.layout.row_list_item,
                 (ArrayList<Situation>) situationManager.getAll());
 
         situationsListView.setAdapter(mAdapter);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToNextActivity = new Intent(getActivity().getApplicationContext(), SituationActivity.class);
+                startActivity(goToNextActivity);
+            }
+        });
 
         return rootView;
     }
