@@ -5,7 +5,8 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="2">
+
 
     <TableLayout
         android:layout_width="fill_parent"
@@ -20,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/cration_situation"
+                android:text="@string/cr_situation"
                 android:id="@+id/textView2"
                 android:gravity="center_vertical|center_horizontal" />
 
@@ -38,27 +39,41 @@
         </TableRow>
     </TableLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:hint="@string/situation" />
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:id="@+id/message"
-        android:gravity="top"
-        android:layout_weight="0.85"
-        android:hint="@string/msg_aletre" />
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:id="@+id/txt_situation"
+                android:hint="@string/situation"/>
+        </TableRow>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/message"
+            android:gravity="top"
+            android:layout_weight="0"
+            android:hint="@string/msg_aletre" />
+
+    </TableLayout>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="123dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="bottom">
 
         <TableRow
             android:layout_width="match_parent"
@@ -123,12 +138,42 @@
 
         </TableRow>
 
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/lst_contacts"
+                android:id="@+id/textView" />
+        </TableRow>
+
+
     </TableLayout>
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/btn_suivant"
-        android:id="@+id/btn_suivant"/>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/list"/>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_valider"
+                android:id="@+id/btn_valider" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
