@@ -7,7 +7,10 @@ import com.emergency.entity.User;
  */
 public interface UserManager {
     public boolean create(User user);
+
     public User getUser();
+
     public boolean edit(User s);
+
     public void remove(int id);
 }

@@ -24,14 +24,14 @@ public class ManageSituation extends Fragment {
     private ListView situationsListView;
     private SituationAdapter mAdapter;
 
-	public ManageSituation(){
+    public ManageSituation() {
         situationManager = new DefaultSituationManager(getActivity());
     }
-	
-	@Override
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
+                             Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.manage_situation_fragment, container, false);
 
         situationsListView = (ListView) rootView.findViewById(R.id.situations_list);

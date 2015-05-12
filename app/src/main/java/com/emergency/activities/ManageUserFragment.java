@@ -28,13 +28,14 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ManageUserFragment extends Fragment  implements OnTaskCompleted<ManageUserOut> {
-	private View rootView;
+public class ManageUserFragment extends Fragment implements OnTaskCompleted<ManageUserOut> {
+    private View rootView;
     private UserManager userManager;
 
-	public ManageUserFragment(){
+    public ManageUserFragment() {
         userManager = new UserManagerImpl(getActivity());
     }
+
     DateFormat fmtDateAndTime = DateFormat.getDateInstance();
     TextView lblDateAndTime;
     Calendar myCalendar = Calendar.getInstance();
@@ -52,10 +53,11 @@ public class ManageUserFragment extends Fragment  implements OnTaskCompleted<Man
     private void updateLabel() {
         lblDateAndTime.setText(fmtDateAndTime.format(myCalendar.getTime()));
     }
-	@Override
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
+                             Bundle savedInstanceState) {
+
         rootView = inflater.inflate(R.layout.fragment_manage_user, container, false);
         Spinner spinner = (Spinner) rootView.findViewById(R.id.bloodtype_spinner);
 
@@ -68,11 +70,9 @@ public class ManageUserFragment extends Fragment  implements OnTaskCompleted<Man
         spinner.setAdapter(adapter);
 
         Button button = (Button) rootView.findViewById(R.id.save);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
                 saveUser();
             }
@@ -88,28 +88,29 @@ public class ManageUserFragment extends Fragment  implements OnTaskCompleted<Man
             }
         });
 
-        TelephonyManager mTelephonyMgr=(TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager mTelephonyMgr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
 
 
-        Logger.getAnonymousLogger().log(Level.INFO,"phone number : ",mTelephonyMgr.getLine1Number());
+        Logger.getAnonymousLogger().log(Level.INFO, "phone number : ", mTelephonyMgr.getLine1Number());
         ((TextView) rootView.findViewById(R.id.textTelephone)).setText(mTelephonyMgr.getLine1Number());
 
         return rootView;
     }
 
-    public void saveUser(){
+    public void saveUser() {
         userManager.create(UserUtil.mapUser(getUser()));
         Logger.getAnonymousLogger().log(Level.INFO, "userAdded : ", userManager.getUser());
         //new AsyncWsCaller<ManageUserIn,ManageUserOut>(this,getUser(),ManageUserOut.class,
-          //                                            EmergencyConstants.MANAGE_USER_URL).execute();
+        //                                            EmergencyConstants.MANAGE_USER_URL).execute();
     }
 
-    public void onTaskCompleted(ManageUserOut manageUserOut){
+    public void onTaskCompleted(ManageUserOut manageUserOut) {
 
     }
+
     private ManageUserIn getUser() {
         ManageUserIn manageUserIn = new ManageUserIn();
-        manageUserIn.setCodeFonction((short)1);
+        manageUserIn.setCodeFonction((short) 1);
         manageUserIn.setUserDTO(new UserDTO());
 
         manageUserIn.getUserDTO().setTelephone(String.valueOf((

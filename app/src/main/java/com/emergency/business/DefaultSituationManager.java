@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Noureddine on 20/04/2015.
  */
-public class DefaultSituationManager implements SituationManager{
+public class DefaultSituationManager implements SituationManager {
     private SituationDao situationDao;
 
     public DefaultSituationManager(Context c) {
@@ -20,7 +20,7 @@ public class DefaultSituationManager implements SituationManager{
 
     @Override
     public boolean add(Situation s) {
-        return situationDao.insert(s) > 0 ;
+        return situationDao.insert(s) > 0;
     }
 
     @Override
@@ -35,11 +35,11 @@ public class DefaultSituationManager implements SituationManager{
 
     @Override
     public boolean edit(Situation s) {
-       return true;
+        return true;
     }
 
     @Override
     public void remove(int id) {
-    //    situationDao.delete(id);
+        //    situationDao.delete(id);
     }
 }

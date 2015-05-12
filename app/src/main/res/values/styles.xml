@@ -6,8 +6,7 @@
 
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
-    </style>
+    <style name="AppTheme" parent="AppBaseTheme"></style>
 
     <style name="Theme.MyCompatTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/winBackground</item>
@@ -15,8 +14,7 @@
         <item name="actionBarStyle">@style/ActionBar</item>
     </style>
 
-    <style name="ActionBar"
-        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/background</item>
         <item name="background">@color/background</item>
     </style>

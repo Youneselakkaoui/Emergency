@@ -4,7 +4,6 @@ package com.emergency.dto;
  * Anomalie retournee par le service Emergency
  *
  * @author elmehdiharabida
- *
  */
 public class EmergencyAnomalieDTO extends EmergencyDTO {
 

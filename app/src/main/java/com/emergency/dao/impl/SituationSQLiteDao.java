@@ -44,7 +44,7 @@ public class SituationSQLiteDao implements SituationDao {
         values.put(Situation.SITUATION_TYPE_ENVOI, s.getTypeEnvoi());
 
         // insert row_list_item
-        return (int)this.dbW.insert(Situation.TABLE_SITUATION, null, values);
+        return (int) this.dbW.insert(Situation.TABLE_SITUATION, null, values);
     }
 
     @Override
@@ -84,11 +84,11 @@ public class SituationSQLiteDao implements SituationDao {
          */
         // (int idSituation, String emetteur, String titre, String message, short piecesJointes, short typeEnvoi)
         Situation s = new Situation(Integer.parseInt(cursor.getString(0)),
-                                    cursor.getString(1),
-                                    cursor.getString(2),
-                                    cursor.getString(3),
-                                    Short.parseShort(cursor.getString(4)),
-                                    Short.parseShort(cursor.getString(5)));
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                Short.parseShort(cursor.getString(4)),
+                Short.parseShort(cursor.getString(5)));
         // return contact
         return s;
     }
@@ -105,19 +105,19 @@ public class SituationSQLiteDao implements SituationDao {
         if (cursor.moveToFirst()) {
             do {
 
-                System.out.println("cursor.getString(0)" +  cursor.getString(0));
-                System.out.println("cursor.getString(1)" +  cursor.getString(1));
-                System.out.println("cursor.getString(2)" +  cursor.getString(2));
-                System.out.println("cursor.getString(3)" +  cursor.getString(3));
-                System.out.println("cursor.getString(4)" +  cursor.getString(4));
-                System.out.println("cursor.getString(5)" +  cursor.getString(5));
+                System.out.println("cursor.getString(0)" + cursor.getString(0));
+                System.out.println("cursor.getString(1)" + cursor.getString(1));
+                System.out.println("cursor.getString(2)" + cursor.getString(2));
+                System.out.println("cursor.getString(3)" + cursor.getString(3));
+                System.out.println("cursor.getString(4)" + cursor.getString(4));
+                System.out.println("cursor.getString(5)" + cursor.getString(5));
 
                 Situation s = new Situation(Integer.parseInt(cursor.getString(0)),
-                                            cursor.getString(1),
-                                            cursor.getString(2),
-                                            cursor.getString(3),
-                                            Short.parseShort(cursor.getString(4)),
-                                            Short.parseShort(cursor.getString(5)));
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        Short.parseShort(cursor.getString(4)),
+                        Short.parseShort(cursor.getString(5)));
                 // Adding Situation to list
                 list.add(s);
             } while (cursor.moveToNext());

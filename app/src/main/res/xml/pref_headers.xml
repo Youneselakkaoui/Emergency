@@ -2,7 +2,8 @@
 
     <!-- These settings headers are only used on tablets. -->
 
-    <header android:fragment="com.emergency.presentation.SettingsActivity$GeneralPreferenceFragment"
+    <header
+        android:fragment="com.emergency.presentation.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header

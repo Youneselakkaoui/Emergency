@@ -70,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/fichiers_joints"/>
+                android:text="@string/fichiers_joints" />
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,6 +93,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/type_envoie"
                 android:id="@+id/space_01" />
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,6 +115,7 @@
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/space_02" />
+
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,11 +127,12 @@
         </TableRow>
 
     </TableLayout>
+
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="@string/btn_suivant"
-        android:id="@+id/btn_suivant"/>
+        android:id="@+id/btn_suivant" />
 
 </LinearLayout>

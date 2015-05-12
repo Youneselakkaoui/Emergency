@@ -7,6 +7,7 @@ package com.emergency.adapter;
 import com.emergency.activities.R;
 import com.emergency.entity.Situation;
 import com.etsy.android.grid.util.DynamicHeightImageView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -98,7 +99,7 @@ public class SampleAdapter extends ArrayAdapter<Situation> {
     }
 
     private String getRandomColor() {
-        String[] colors = new String[] {"#DADADA", "#B1F8F4", "#D2D2FF", "#BEAAFB", "#99FF00"};
-        return colors[mRandom.nextInt(5)] ;
+        String[] colors = new String[]{"#DADADA", "#B1F8F4", "#D2D2FF", "#BEAAFB", "#99FF00"};
+        return colors[mRandom.nextInt(5)];
     }
 }

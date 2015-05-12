@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by elmehdiharabida on 21/04/2015.
  */
-public class AsyncWsCaller<Parameter,Return> extends AsyncTask<Void, Void, Return> {
+public class AsyncWsCaller<Parameter, Return> extends AsyncTask<Void, Void, Return> {
 
     private OnTaskCompleted<Return> listener;
     Parameter parameterIn;
@@ -24,10 +24,8 @@ public class AsyncWsCaller<Parameter,Return> extends AsyncTask<Void, Void, Retur
     String url;
 
 
-
-
-        public AsyncWsCaller(OnTaskCompleted listener, Parameter parameterIn, Class returnClassType, String url){
-        this.listener=listener;
+    public AsyncWsCaller(OnTaskCompleted listener, Parameter parameterIn, Class returnClassType, String url) {
+        this.listener = listener;
         this.parameterIn = parameterIn;
         this.returnClassType = returnClassType;
         this.url = url;
@@ -38,9 +36,9 @@ public class AsyncWsCaller<Parameter,Return> extends AsyncTask<Void, Void, Retur
         RestTemplate restTemplate = new RestTemplate();
         Return manageUserOut = null;
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        try{
-        manageUserOut = (Return) restTemplate.postForObject(url, parameterIn,returnClassType);
-        }catch(Exception e){
+        try {
+            manageUserOut = (Return) restTemplate.postForObject(url, parameterIn, returnClassType);
+        } catch (Exception e) {
             Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
         }
         return manageUserOut;

@@ -9,8 +9,12 @@ import java.util.List;
  */
 public interface SituationDao {
     public int insert(Situation situation);
+
     public int update(Situation situation);
+
     public int delete(Situation situation);
+
     public Situation select(int id);
+
     public List<Situation> selectAll();
 }

@@ -10,8 +10,12 @@ import java.util.List;
 public interface UserDao {
 
     public int insert(User situation);
+
     public int update(User situation);
+
     public int delete(User situation);
+
     public User select(String telephone);
+
     public User selectUser();
 }

@@ -6,34 +6,33 @@ import java.util.List;
 
 /**
  * The persistent class for the situation database table.
- * 
  */
 
 public class Situation implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     // Table name
     public static final String TABLE_SITUATION = "situation";
     // Common column names
-    public static final String SITUATION_KEY_ID         = "id_situation";
-    public static final String SITUATION_ID_EMETTEUR    = "id_emetteur";
-    public static final String SITUATION_TITRE          = "titre";
-    public static final String SITUATION_MESSAGE        = "message";
+    public static final String SITUATION_KEY_ID = "id_situation";
+    public static final String SITUATION_ID_EMETTEUR = "id_emetteur";
+    public static final String SITUATION_TITRE = "titre";
+    public static final String SITUATION_MESSAGE = "message";
     public static final String SITUATION_PIECES_JOINTES = "pieces_jointes";
-    public static final String SITUATION_TYPE_ENVOI     = "type_envoi";
+    public static final String SITUATION_TYPE_ENVOI = "type_envoi";
 
-	private int idSituation;
-	private String message;
-	private short piecesJointes;
-	private String titre;
-	private short typeEnvoi;
-	private List<Alerte> alertes;
-	private List<RecepteursSituation> recepteursSituations;
-	private User user;
+    private int idSituation;
+    private String message;
+    private short piecesJointes;
+    private String titre;
+    private short typeEnvoi;
+    private List<Alerte> alertes;
+    private List<RecepteursSituation> recepteursSituations;
+    private User user;
 
-	public Situation() {
+    public Situation() {
 
-	}
+    }
 
     public Situation(int idSituation, String emetteur, String titre, String message, short piecesJointes, short typeEnvoi) {
         this.idSituation = idSituation;
@@ -46,95 +45,95 @@ public class Situation implements Serializable {
     }
 
     public int getIdSituation() {
-		return this.idSituation;
-	}
+        return this.idSituation;
+    }
 
-	public void setIdSituation(int idSituation) {
-		this.idSituation = idSituation;
-	}
+    public void setIdSituation(int idSituation) {
+        this.idSituation = idSituation;
+    }
 
-	public String getMessage() {
-		return this.message;
-	}
+    public String getMessage() {
+        return this.message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public short getPiecesJointes() {
-		return this.piecesJointes;
-	}
+    public short getPiecesJointes() {
+        return this.piecesJointes;
+    }
 
-	public void setPiecesJointes(short piecesJointes) {
-		this.piecesJointes = piecesJointes;
-	}
+    public void setPiecesJointes(short piecesJointes) {
+        this.piecesJointes = piecesJointes;
+    }
 
-	public String getTitre() {
-		return this.titre;
-	}
+    public String getTitre() {
+        return this.titre;
+    }
 
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
 
-	public short getTypeEnvoi() {
-		return this.typeEnvoi;
-	}
+    public short getTypeEnvoi() {
+        return this.typeEnvoi;
+    }
 
-	public void setTypeEnvoi(short typeEnvoi) {
-		this.typeEnvoi = typeEnvoi;
-	}
+    public void setTypeEnvoi(short typeEnvoi) {
+        this.typeEnvoi = typeEnvoi;
+    }
 
-	public List<Alerte> getAlertes() {
-		return this.alertes;
-	}
+    public List<Alerte> getAlertes() {
+        return this.alertes;
+    }
 
-	public void setAlertes(List<Alerte> alertes) {
-		this.alertes = alertes;
-	}
+    public void setAlertes(List<Alerte> alertes) {
+        this.alertes = alertes;
+    }
 
-	public Alerte addAlerte(Alerte alerte) {
-		getAlertes().add(alerte);
-		alerte.setSituation(this);
+    public Alerte addAlerte(Alerte alerte) {
+        getAlertes().add(alerte);
+        alerte.setSituation(this);
 
-		return alerte;
-	}
+        return alerte;
+    }
 
-	public Alerte removeAlerte(Alerte alerte) {
-		getAlertes().remove(alerte);
-		alerte.setSituation(null);
+    public Alerte removeAlerte(Alerte alerte) {
+        getAlertes().remove(alerte);
+        alerte.setSituation(null);
 
-		return alerte;
-	}
+        return alerte;
+    }
 
-	public List<RecepteursSituation> getRecepteursSituations() {
-		return this.recepteursSituations;
-	}
+    public List<RecepteursSituation> getRecepteursSituations() {
+        return this.recepteursSituations;
+    }
 
-	public void setRecepteursSituations(List<RecepteursSituation> recepteursSituations) {
-		this.recepteursSituations = recepteursSituations;
-	}
+    public void setRecepteursSituations(List<RecepteursSituation> recepteursSituations) {
+        this.recepteursSituations = recepteursSituations;
+    }
 
-	public RecepteursSituation addRecepteursSituation(RecepteursSituation recepteursSituation) {
-		getRecepteursSituations().add(recepteursSituation);
-		recepteursSituation.setSituation(this);
+    public RecepteursSituation addRecepteursSituation(RecepteursSituation recepteursSituation) {
+        getRecepteursSituations().add(recepteursSituation);
+        recepteursSituation.setSituation(this);
 
-		return recepteursSituation;
-	}
+        return recepteursSituation;
+    }
 
-	public RecepteursSituation removeRecepteursSituation(RecepteursSituation recepteursSituation) {
-		getRecepteursSituations().remove(recepteursSituation);
-		recepteursSituation.setSituation(null);
+    public RecepteursSituation removeRecepteursSituation(RecepteursSituation recepteursSituation) {
+        getRecepteursSituations().remove(recepteursSituation);
+        recepteursSituation.setSituation(null);
 
-		return recepteursSituation;
-	}
+        return recepteursSituation;
+    }
 
-	public User getUser() {
-		return this.user;
-	}
+    public User getUser() {
+        return this.user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

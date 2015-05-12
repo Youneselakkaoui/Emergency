@@ -20,7 +20,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public boolean create(User user) {
-        return userDao.insert(user) > 0 ;
+        return userDao.insert(user) > 0;
     }
 
     @Override

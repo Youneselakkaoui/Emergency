@@ -13,8 +13,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 public class PhotosFragment extends Fragment {
-	
-	public PhotosFragment(){}
+
+    public PhotosFragment() {
+    }
+
     DateFormat fmtDateAndTime = DateFormat.getDateInstance();
     TextView lblDateAndTime;
     Calendar myCalendar = Calendar.getInstance();
@@ -32,10 +34,11 @@ public class PhotosFragment extends Fragment {
     private void updateLabel() {
         lblDateAndTime.setText(fmtDateAndTime.format(myCalendar.getTime()));
     }
-	@Override
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
+                             Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_photos, container, false);
 
         return rootView;

@@ -43,7 +43,7 @@ public class HomeActivity extends ActionBarActivity
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp( R.id.navigation_drawer,drawerLayout);
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, drawerLayout);
 
     }
 
@@ -70,7 +70,7 @@ public class HomeActivity extends ActionBarActivity
 
     /**
      * Diplaying fragment view for selected nav drawer list item
-     * */
+     */
     private void displayView(int position) {
         // update the main content by replacing fragments
         android.app.Fragment fragment = null;

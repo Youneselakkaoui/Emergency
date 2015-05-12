@@ -1,6 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.emergency.activities.ManageUserFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.emergency.activities.ManageUserFragment">
 
     <TableLayout
         android:layout_width="fill_parent"
@@ -43,6 +45,7 @@
                 android:text="@string/manage_user_prenom"
                 android:id="@+id/labelprenom"
                 android:layout_column="1" />
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,8 +54,6 @@
                 android:ems="10"
                 android:id="@+id/textprenom" />
         </TableRow>
-
-
 
 
         <TableRow
@@ -78,6 +79,7 @@
                 android:id="@+id/textDtNaiss"
                 android:editable="false"
                 android:enabled="false" />
+
             <ImageButton
                 android:id="@+id/buttonSetDate"
                 android:layout_width="wrap_content"
@@ -109,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/textTelephone"/>
+                android:id="@+id/textTelephone" />
 
         </TableRow>
 
@@ -127,12 +129,15 @@
                 android:text="Sexe :"
                 android:id="@+id/txthomme"
                 android:layout_column="1" />
+
             <RadioGroup>
+
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Homme"
                     android:id="@+id/radiohomme" />
+
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -160,8 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bloodtype_spinner"
-                style="@android:style/Widget.DeviceDefault.DropDownItem.Spinner"
-                />
+                style="@android:style/Widget.DeviceDefault.DropDownItem.Spinner" />
 
 
         </TableRow>
@@ -176,8 +180,7 @@
                 android:id="@+id/save"
                 android:layout_column="2"
                 android:text="@string/manage_user_saveButton"
-                android:clickable="true"
-                 />
+                android:clickable="true" />
         </TableRow>
 
 

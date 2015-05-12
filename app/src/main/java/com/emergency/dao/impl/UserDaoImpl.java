@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
         values.put(User.USER_PRENOM, user.getPrenom());
         values.put(User.USER_SEXE, user.getSexe());
         values.put(User.USER_TELEPHONE, user.getTelephone());
-        return (int) dbW.insert(User.TABLE_USER,null,values);
+        return (int) dbW.insert(User.TABLE_USER, null, values);
     }
 
     @Override
@@ -78,17 +78,17 @@ public class UserDaoImpl implements UserDao {
                         User.USER_TELEPHONE
                 }, User.USER_TELEPHONE + "=?",
                 new String[]{null,null,null,null, null, null, null, null,telephone};*/
-        if (cursor != null){
+        if (cursor != null) {
             cursor.moveToFirst();
-            System.out.println("cursor.getString(0)" +  cursor.getString(0));
-            System.out.println("cursor.getString(1)" +  cursor.getString(1));
-            System.out.println("cursor.getString(2)" +  cursor.getString(2));
-            System.out.println("cursor.getString(3)" +  cursor.getString(3));
-            System.out.println("cursor.getString(4)" +  cursor.getString(4));
-            System.out.println("cursor.getString(5)" +  cursor.getString(5));
-            System.out.println("cursor.getString(6)" +  cursor.getString(6));
-            System.out.println("cursor.getString(7)" +  cursor.getString(7));
-            System.out.println("cursor.getString(8)" +  cursor.getString(8));
+            System.out.println("cursor.getString(0)" + cursor.getString(0));
+            System.out.println("cursor.getString(1)" + cursor.getString(1));
+            System.out.println("cursor.getString(2)" + cursor.getString(2));
+            System.out.println("cursor.getString(3)" + cursor.getString(3));
+            System.out.println("cursor.getString(4)" + cursor.getString(4));
+            System.out.println("cursor.getString(5)" + cursor.getString(5));
+            System.out.println("cursor.getString(6)" + cursor.getString(6));
+            System.out.println("cursor.getString(7)" + cursor.getString(7));
+            System.out.println("cursor.getString(8)" + cursor.getString(8));
        /* s = new User(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1),
                 cursor.getString(2),
@@ -98,7 +98,6 @@ public class UserDaoImpl implements UserDao {
         }
         // return contact
         return s;
-
 
 
     }

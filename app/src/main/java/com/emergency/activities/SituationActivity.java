@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.emergency.activities.R;
 
-public class SituationActivity extends ActionBarActivity implements View.OnClickListener{
+public class SituationActivity extends ActionBarActivity implements View.OnClickListener {
     private EditText titreText, descText;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

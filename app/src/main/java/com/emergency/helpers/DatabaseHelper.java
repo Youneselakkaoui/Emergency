@@ -42,19 +42,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_SITUATION = "CREATE TABLE "
             + Situation.TABLE_SITUATION + "("
             + Situation.SITUATION_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + Situation.SITUATION_ID_EMETTEUR     + " CHAR(20) NOT NULL,"
-   //         "  `id_emetteur` VARCHAR(20) NOT NULL,\n" +
-            + Situation.SITUATION_TITRE           + " CHAR(45) NOT NULL,"
-   //         "  `titre` VARCHAR(45) NOT NULL,\n" +
-            + Situation.SITUATION_MESSAGE         + " TEXT(300),"
-   //         "  `message` TEXT(300) NULL,\n" +
-            + Situation.SITUATION_PIECES_JOINTES  + " SMALLINT(1) NULL, "
-   //         "  `pieces_jointes` SMALLINT(1) NULL,\n" +
-            + Situation.SITUATION_TYPE_ENVOI      + " SMALLINT(1) NULL "
-   //         "  `type_envoi` SMALLINT(1) NULL,";
+            + Situation.SITUATION_ID_EMETTEUR + " CHAR(20) NOT NULL,"
+            //         "  `id_emetteur` VARCHAR(20) NOT NULL,\n" +
+            + Situation.SITUATION_TITRE + " CHAR(45) NOT NULL,"
+            //         "  `titre` VARCHAR(45) NOT NULL,\n" +
+            + Situation.SITUATION_MESSAGE + " TEXT(300),"
+            //         "  `message` TEXT(300) NULL,\n" +
+            + Situation.SITUATION_PIECES_JOINTES + " SMALLINT(1) NULL, "
+            //         "  `pieces_jointes` SMALLINT(1) NULL,\n" +
+            + Situation.SITUATION_TYPE_ENVOI + " SMALLINT(1) NULL "
+            //         "  `type_envoi` SMALLINT(1) NULL,";
             + ");";
 
-    private static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER+ " ( "
+    private static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER + " ( "
             + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
             + User.USER_NOM + " CHAR(30) NOT NULL, "
             + User.USER_PRENOM + " CHAR(30) NOT NULL, "
@@ -64,105 +64,104 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + User.USER_DIABETE + " SMALLINT(1), "
             + User.USER_CHOLESTEROL + " SMALLINT(1), "
             + User.USER_AUTRESINFOS + " TEXT(500) "
-            + ");"
-            ;
+            + ");";
 
-   @Override
-   public void onCreate(SQLiteDatabase dbo) {
-       dbo.execSQL(CREATE_TABLE_SITUATION);
-       dbo.execSQL(CREATE_TABLE_USER);
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Help !!',   " +
-               "'ALERTE, HELP ME, !!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Help2 !!',   " +
-               "'ALERTE, HELP ME, !!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Help3 !!',   " +
-               "'ALERTE, HELP ME, !!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Accedent',   " +
-               "'ALERTE, HELP ME,!!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Accedent 2',   " +
-               "'ALERTE, HELP ME,!!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Accedent 3',   " +
-               "'ALERTE, HELP ME,!!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Incendi',   " +
-               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Incendi X',   " +
-               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Incendi 3',   " +
-               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
-               "1, 2);");
-       dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
-               + Situation.SITUATION_ID_EMETTEUR     + ","
-               + Situation.SITUATION_TITRE           + ","
-               + Situation.SITUATION_MESSAGE         + ","
-               + Situation.SITUATION_PIECES_JOINTES  + ","
-               + Situation.SITUATION_TYPE_ENVOI
-               + ") VALUES('0654200743', 'Incendi 5',   " +
-               "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
-               "1, 2);");
+    @Override
+    public void onCreate(SQLiteDatabase dbo) {
+        dbo.execSQL(CREATE_TABLE_SITUATION);
+        dbo.execSQL(CREATE_TABLE_USER);
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Help !!',   " +
+                "'ALERTE, HELP ME, !!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Help2 !!',   " +
+                "'ALERTE, HELP ME, !!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Help3 !!',   " +
+                "'ALERTE, HELP ME, !!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Accedent',   " +
+                "'ALERTE, HELP ME,!!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Accedent 2',   " +
+                "'ALERTE, HELP ME,!!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Accedent 3',   " +
+                "'ALERTE, HELP ME,!!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Incendi',   " +
+                "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Incendi X',   " +
+                "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Incendi 3',   " +
+                "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+                "1, 2);");
+        dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
+                + Situation.SITUATION_ID_EMETTEUR + ","
+                + Situation.SITUATION_TITRE + ","
+                + Situation.SITUATION_MESSAGE + ","
+                + Situation.SITUATION_PIECES_JOINTES + ","
+                + Situation.SITUATION_TYPE_ENVOI
+                + ") VALUES('0654200743', 'Incendi 5',   " +
+                "'ALERTE, HELP ME, I M HERE !!!!!!!'," +
+                "1, 2);");
 
-   }
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

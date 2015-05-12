@@ -45,8 +45,8 @@ import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements AbsListView.OnScrollListener,
-                                                      AbsListView.OnItemClickListener,
-                                                      OnTaskCompleted<ManageAlerteOut> {
+        AbsListView.OnItemClickListener,
+        OnTaskCompleted<ManageAlerteOut> {
 
     public static final String SAVED_DATA_KEY = "SAVED_DATA";
     private SharedPreferences prefs = null;
@@ -60,14 +60,14 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     private AlerteDTO alerte;
 
 
-	public HomeFragment(){
+    public HomeFragment() {
 
     }
-	
-	@Override
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
+                             Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         situationManager = new DefaultSituationManager(getActivity());
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
         gps = new GPSTracker(getActivity());
         Situation s = situationManager.getAll().get(position);
         // check if GPS enabled
-        if(gps.canGetLocation()){
+        if (gps.canGetLocation()) {
             alerte = new AlerteDTO();
             alerte.setDateEnvoi(new Date());
 
@@ -114,10 +114,10 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
             double longitude = gps.getLongitude();
 
             alerte.setLocalisationEmX(gps.getLatitude() + "");
-            alerte.setLocalisationEmY(gps.getLongitude() +  "");
+            alerte.setLocalisationEmY(gps.getLongitude() + "");
 
             alerte.setSituation(s);
-            alerte.setStatut((short)0);
+            alerte.setStatut((short) 0);
 
             List<SuiviAlerte> suivies = new ArrayList<SuiviAlerte>();
             List<RecepteursSituation> rs = s.getRecepteursSituations();
@@ -134,11 +134,11 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
 
             // \n is for new line
             Toast.makeText(getActivity().getApplicationContext(),
-                           "Your Location is - \nLat: " + latitude + "\nLong: " + longitude,
-                            Toast.LENGTH_LONG).show();
+                    "Your Location is - \nLat: " + latitude + "\nLong: " + longitude,
+                    Toast.LENGTH_LONG).show();
             intent.putExtra("Situation", s);
             startActivity(intent);
-        }else{
+        } else {
             // can't get location
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
@@ -169,7 +169,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     }
 
     private void onLoadMoreItems() {
-        final ArrayList<Situation> sampleData = (ArrayList<Situation>)situationManager.getAll();
+        final ArrayList<Situation> sampleData = (ArrayList<Situation>) situationManager.getAll();
         for (Situation data : sampleData) {
             mAdapter.add(data);
         }
@@ -193,12 +193,12 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     }
 
     public void saveAlerte() {
-        new AsyncWsCaller<ManageAlerteIn,ManageAlerteOut>(getActivity(),getAlerte(),ManageAlerteOut.class, EmergencyConstants.MANAGE_USER_URL).execute();
+        new AsyncWsCaller<ManageAlerteIn, ManageAlerteOut>(getActivity(), getAlerte(), ManageAlerteOut.class, EmergencyConstants.MANAGE_USER_URL).execute();
     }
 
     public ManageAlerteIn getAlerte() {
         ManageAlerteIn man = new ManageAlerteIn();
-        man.setCodeFonction((short)1);
+        man.setCodeFonction((short) 1);
         man.setAlerteDTO(alerte);
 
         return man;

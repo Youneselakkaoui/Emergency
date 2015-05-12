@@ -4,99 +4,99 @@ import java.util.Date;
 
 public class UserDTO extends EmergencyDTO {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -4456382937240505471L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4456382937240505471L;
 
-	private String autresInfos;
+    private String autresInfos;
 
-	private short cholesterol;
+    private short cholesterol;
 
-	private Date dateNaissance;
+    private Date dateNaissance;
 
-	private short diabete;
+    private short diabete;
 
-	private short groupSanguin;
+    private short groupSanguin;
 
-	private String nom;
+    private String nom;
 
-	private String prenom;
+    private String prenom;
 
-	private short sexe;
+    private short sexe;
 
-	private String telephone;
+    private String telephone;
 
-	public String getAutresInfos() {
-		return this.autresInfos;
-	}
+    public String getAutresInfos() {
+        return this.autresInfos;
+    }
 
-	public short getCholesterol() {
-		return this.cholesterol;
-	}
+    public short getCholesterol() {
+        return this.cholesterol;
+    }
 
-	public Date getDateNaissance() {
-		return this.dateNaissance;
-	}
+    public Date getDateNaissance() {
+        return this.dateNaissance;
+    }
 
-	public short getDiabete() {
-		return this.diabete;
-	}
+    public short getDiabete() {
+        return this.diabete;
+    }
 
-	public short getGroupSanguin() {
-		return this.groupSanguin;
-	}
+    public short getGroupSanguin() {
+        return this.groupSanguin;
+    }
 
-	public String getNom() {
-		return this.nom;
-	}
+    public String getNom() {
+        return this.nom;
+    }
 
-	public String getPrenom() {
-		return this.prenom;
-	}
+    public String getPrenom() {
+        return this.prenom;
+    }
 
-	public short getSexe() {
-		return this.sexe;
-	}
+    public short getSexe() {
+        return this.sexe;
+    }
 
-	public String getTelephone() {
-		return this.telephone;
-	}
+    public String getTelephone() {
+        return this.telephone;
+    }
 
-	public void setAutresInfos(final String autresInfos) {
-		this.autresInfos = autresInfos;
-	}
+    public void setAutresInfos(final String autresInfos) {
+        this.autresInfos = autresInfos;
+    }
 
-	public void setCholesterol(final short cholesterol) {
-		this.cholesterol = cholesterol;
-	}
+    public void setCholesterol(final short cholesterol) {
+        this.cholesterol = cholesterol;
+    }
 
-	public void setDateNaissance(final Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
+    public void setDateNaissance(final Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
 
-	public void setDiabete(final short diabete) {
-		this.diabete = diabete;
-	}
+    public void setDiabete(final short diabete) {
+        this.diabete = diabete;
+    }
 
-	public void setGroupSanguin(final short groupSanguin) {
-		this.groupSanguin = groupSanguin;
-	}
+    public void setGroupSanguin(final short groupSanguin) {
+        this.groupSanguin = groupSanguin;
+    }
 
-	public void setNom(final String nom) {
-		this.nom = nom;
-	}
+    public void setNom(final String nom) {
+        this.nom = nom;
+    }
 
-	public void setPrenom(final String prenom) {
-		this.prenom = prenom;
-	}
+    public void setPrenom(final String prenom) {
+        this.prenom = prenom;
+    }
 
-	public void setSexe(final short sexe) {
-		this.sexe = sexe;
-	}
+    public void setSexe(final short sexe) {
+        this.sexe = sexe;
+    }
 
-	public void setTelephone(final String telephone) {
-		this.telephone = telephone;
-	}
+    public void setTelephone(final String telephone) {
+        this.telephone = telephone;
+    }
 
 }

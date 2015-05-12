@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +21,8 @@ import com.emergency.business.SituationManager;
 
 public class MainActivity extends ActionBarActivity {
     private SharedPreferences prefs = null;
-    private GridLayout gridLayout   = null;
-    private TextView[] textViews    = null;
+    private GridLayout gridLayout = null;
+    private TextView[] textViews = null;
     private SituationManager situationManager;
     private String titre;
     TextView mDateTextView;
@@ -53,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
 
             textViews = new TextView[lSize];
 
-            for(int i =0; i < lSize; i++) {
+            for (int i = 0; i < lSize; i++) {
                 textViews[i] = new TextView(this);
                 textViews[i].setText(situationManager.getAll().get(i).getTitre());
                 textViews[i].setTextSize(25);
@@ -63,15 +62,14 @@ public class MainActivity extends ActionBarActivity {
 
             setContentView(gridLayout);
 
-            for(int i =0; i < lSize; i++)
-            {
+            for (int i = 0; i < lSize; i++) {
                 titre = situationManager.getAll().get(i).getTitre();
                 textViews[i].setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View v) {
                         Toast.makeText(getBaseContext(),
-                                       titre + " Clicked",
-                                       Toast.LENGTH_SHORT).show();
+                                titre + " Clicked",
+                                Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -79,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
             //setContentView(gridView);
 
         }
-
 
 
     }
@@ -149,7 +146,6 @@ public class MainActivity extends ActionBarActivity {
 
         }
     }
-
 
 
 }

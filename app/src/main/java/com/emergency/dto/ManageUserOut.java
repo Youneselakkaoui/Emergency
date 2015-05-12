@@ -3,12 +3,10 @@ package com.emergency.dto;
 import java.io.Serializable;
 
 
-
 /**
  * Sortie de manageUser
  *
  * @author elmehdiharabida
- *
  */
 public class ManageUserOut implements Serializable {
     /**
@@ -23,21 +21,21 @@ public class ManageUserOut implements Serializable {
      * Donnees utilisateur
      */
     private UserDTO userDTO;
-    
+
     public EmergencyAnomalieDTO getAnomalie() {
         return anomalie;
     }
-    
+
     public UserDTO getUserDTO() {
         return userDTO;
     }
-    
+
     public void setAnomalie(final EmergencyAnomalieDTO anomalie) {
         this.anomalie = anomalie;
     }
-    
+
     public void setUserDTO(final UserDTO userDTO) {
         this.userDTO = userDTO;
     }
-    
+
 }

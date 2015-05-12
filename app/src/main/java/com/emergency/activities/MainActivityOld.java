@@ -29,8 +29,8 @@ import java.util.ArrayList;
 
 public class MainActivityOld extends Activity {
     private SharedPreferences prefs = null;
-    private GridLayout gridLayout   = null;
-    private Button[] buttons        = null;
+    private GridLayout gridLayout = null;
+    private Button[] buttons = null;
     private String[] menuItems;
     private SituationManager situationManager;
     private String titre;
@@ -67,65 +67,65 @@ public class MainActivityOld extends Activity {
             Intent goToNextActivity = new Intent(getApplicationContext(), SituationActivity.class);
             startActivity(goToNextActivity);
         } else {*/
-            title = drawerTitle = getTitle();
+        title = drawerTitle = getTitle();
 
-            //load slide menu Items
-            navMenuTitles = getResources().getStringArray(R.array.main_menu);
+        //load slide menu Items
+        navMenuTitles = getResources().getStringArray(R.array.main_menu);
 
-            //load drawer icons from resources
-            navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+        //load drawer icons from resources
+        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 
-            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawerList   = (ListView) findViewById(R.id.list_slidermenu);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-            navDrawerItems = new ArrayList<NavDrawerItem>();
+        navDrawerItems = new ArrayList<NavDrawerItem>();
 
-            // adding nav drawer items to array
-            // Home
-            navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-            // Find People
-            navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-            // Photos
-            navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-            // Communities, Will add a counter here
-            navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
-            // Pages
-            navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
-            // What's hot, We  will add a counter here
-            navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
+        // adding nav drawer items to array
+        // Home
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+        // Find People
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+        // Photos
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+        // Communities, Will add a counter here
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
+        // Pages
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+        // What's hot, We  will add a counter here
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 
-            navMenuIcons.recycle();
+        navMenuIcons.recycle();
 
-            drawerList.setOnItemClickListener(new SlideMenuClickListener());
-            //setting the nav drawer list Adapter
-            adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
-            drawerList.setAdapter(adapter);
-            //enabling action bar app icon and behaving it as toggle button
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setHomeButtonEnabled(true);
+        drawerList.setOnItemClickListener(new SlideMenuClickListener());
+        //setting the nav drawer list Adapter
+        adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
+        drawerList.setAdapter(adapter);
+        //enabling action bar app icon and behaving it as toggle button
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-            drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                    R.drawable.ic_drawer, //nav menu toggle icon
-                    R.string.app_name, // nav drawer open - description for accessibility
-                    R.string.app_name // nav drawer close - description for accessibility
-            ) {
-                public void onDrawerClosed(View view) {
-                    getActionBar().setTitle(title);
-                    // calling onPrepareOptionsMenu() to show action bar icons
-                    invalidateOptionsMenu();
-                }
-
-                public void onDrawerOpened(View drawerView) {
-                    getActionBar().setTitle(drawerTitle);
-                    // calling onPrepareOptionsMenu() to hide action bar icons
-                    invalidateOptionsMenu();
-                }
-            };
-
-            drawerLayout.setDrawerListener(drawerToggle);
-            if(savedInstanceState == null) {
-                displayView(0);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                R.drawable.ic_drawer, //nav menu toggle icon
+                R.string.app_name, // nav drawer open - description for accessibility
+                R.string.app_name // nav drawer close - description for accessibility
+        ) {
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(title);
+                // calling onPrepareOptionsMenu() to show action bar icons
+                invalidateOptionsMenu();
             }
+
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle(drawerTitle);
+                // calling onPrepareOptionsMenu() to hide action bar icons
+                invalidateOptionsMenu();
+            }
+        };
+
+        drawerLayout.setDrawerListener(drawerToggle);
+        if (savedInstanceState == null) {
+            displayView(0);
+        }
 
             /*
             gridLayout = new GridLayout(this);
@@ -179,14 +179,14 @@ public class MainActivityOld extends Activity {
                     }
                 });
             }*/
-            //setContentView(gridView);
+        //setContentView(gridView);
 
         //}
     }
 
     /**
      * Slide menu item click listener
-     * */
+     */
     private class SlideMenuClickListener implements
             ListView.OnItemClickListener {
         @Override
@@ -233,7 +233,7 @@ public class MainActivityOld extends Activity {
     }
 
 
-    /***
+    /**
      * Called when invalidateOptionsMenu() is triggered
      */
     @Override
@@ -246,7 +246,7 @@ public class MainActivityOld extends Activity {
 
     /**
      * Diplaying fragment view for selected nav drawer list item
-     * */
+     */
     private void displayView(int position) {
         // update the main content by replacing fragments
         android.app.Fragment fragment = null;

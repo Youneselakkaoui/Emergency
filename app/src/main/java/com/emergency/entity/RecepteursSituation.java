@@ -6,56 +6,55 @@ import java.util.Date;
 
 /**
  * The persistent class for the recepteurs_situation database table.
- *
  */
 
 public class RecepteursSituation implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Date dateCreation;
+    private Date dateCreation;
 
-	private Date dateModification;
-
-
-	private Situation situation;
-
-	private User user;
-
-	public RecepteursSituation() {
-	}
-
-	public Date getDateCreation() {
-		return this.dateCreation;
-	}
-
-	public Date getDateModification() {
-		return this.dateModification;
-	}
+    private Date dateModification;
 
 
-	public Situation getSituation() {
-		return this.situation;
-	}
+    private Situation situation;
 
-	public User getUser() {
-		return this.user;
-	}
+    private User user;
 
-	public void setDateCreation(final Date dateCreation) {
-		this.dateCreation = dateCreation;
-	}
+    public RecepteursSituation() {
+    }
 
-	public void setDateModification(final Date dateModification) {
-		this.dateModification = dateModification;
-	}
+    public Date getDateCreation() {
+        return this.dateCreation;
+    }
+
+    public Date getDateModification() {
+        return this.dateModification;
+    }
 
 
-	public void setSituation(final Situation situation) {
-		this.situation = situation;
-	}
+    public Situation getSituation() {
+        return this.situation;
+    }
 
-	public void setUser(final User user) {
-		this.user = user;
-	}
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setDateCreation(final Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public void setDateModification(final Date dateModification) {
+        this.dateModification = dateModification;
+    }
+
+
+    public void setSituation(final Situation situation) {
+        this.situation = situation;
+    }
+
+    public void setUser(final User user) {
+        this.user = user;
+    }
 
 }

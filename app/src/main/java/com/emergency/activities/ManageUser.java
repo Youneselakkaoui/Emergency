@@ -71,10 +71,10 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
             }
         });
 
-        TelephonyManager  mTelephonyMgr=(TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
 
-        Logger.getAnonymousLogger().log(Level.INFO,"phone number : ",mTelephonyMgr.getLine1Number());
+        Logger.getAnonymousLogger().log(Level.INFO, "phone number : ", mTelephonyMgr.getLine1Number());
         ((TextView) findViewById(R.id.textTelephone)).setText(mTelephonyMgr.getLine1Number());
 // ajouter spinner indicatif pays
     }
@@ -104,16 +104,17 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
     /**
      * Sauvegarder user
      */
-    public void saveUser(View v){
-        new AsyncWsCaller<ManageUserIn,ManageUserOut>(this,getUser(),ManageUserOut.class,EmergencyConstants.MANAGE_USER_URL).execute();
+    public void saveUser(View v) {
+        new AsyncWsCaller<ManageUserIn, ManageUserOut>(this, getUser(), ManageUserOut.class, EmergencyConstants.MANAGE_USER_URL).execute();
     }
 
-    public void onTaskCompleted(ManageUserOut manageUserOut){
+    public void onTaskCompleted(ManageUserOut manageUserOut) {
 
     }
+
     private ManageUserIn getUser() {
         ManageUserIn manageUserIn = new ManageUserIn();
-        manageUserIn.setCodeFonction((short)1);
+        manageUserIn.setCodeFonction((short) 1);
         manageUserIn.setUserDTO(new UserDTO());
 
         manageUserIn.getUserDTO().setTelephone(String.valueOf(((TextView) findViewById(R.id.textTelephone)).getText()));
@@ -122,8 +123,6 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
         manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
         return manageUserIn;
     }
-
-
 
 
 }

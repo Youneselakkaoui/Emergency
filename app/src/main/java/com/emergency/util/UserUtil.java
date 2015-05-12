@@ -8,7 +8,7 @@ import com.emergency.entity.User;
  */
 public class UserUtil {
 
-    public static User mapUser(ManageUserIn userIn){
+    public static User mapUser(ManageUserIn userIn) {
         User user = new User();
         user.setDateNaissance(userIn.getUserDTO().getDateNaissance());
         user.setTelephone(userIn.getUserDTO().getTelephone());
