@@ -1,8 +1,5 @@
 package com.emergency.activities;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,19 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.emergency.business.AsyncWsCaller;
 import com.emergency.business.OnTaskCompleted;
-import com.emergency.emergency.dto.ManageUserIn;
-import com.emergency.emergency.dto.ManageUserOut;
-import com.emergency.emergency.dto.UserDTO;
-import com.emergency.emergency.util.EmergencyConstants;
-
-import java.util.Calendar;
+import com.emergency.dto.ManageUserIn;
+import com.emergency.dto.ManageUserOut;
+import com.emergency.dto.UserDTO;
+import com.emergency.util.EmergencyConstants;
 
 
 public class ManageUser extends ActionBarActivity implements OnTaskCompleted<ManageUserOut>{
@@ -73,6 +67,7 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
     public void onTaskCompleted(ManageUserOut manageUserOut){
 
     }
+
     private ManageUserIn getUser() {
         ManageUserIn manageUserIn = new ManageUserIn();
         manageUserIn.setCodeFonction((short)1);

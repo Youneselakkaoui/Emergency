@@ -1,4 +1,4 @@
-package com.emergency.emergency.util;
+package com.emergency.util;
 
 /**
  * Constantes pour l'application Emergency

@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import com.emergency.business.AsyncWsCaller;
 import com.emergency.business.OnTaskCompleted;
-import com.emergency.emergency.dto.ManageUserIn;
-import com.emergency.emergency.dto.ManageUserOut;
-import com.emergency.emergency.dto.UserDTO;
-import com.emergency.emergency.util.EmergencyConstants;
+import com.emergency.dto.ManageUserIn;
+import com.emergency.dto.ManageUserOut;
+import com.emergency.dto.UserDTO;
+import com.emergency.util.EmergencyConstants;
 
 public class ManageUserFragment extends Fragment  implements OnTaskCompleted<ManageUserOut> {
 	private View rootView;

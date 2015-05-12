@@ -1,4 +1,4 @@
-package com.emergency.emergency.dto;
+package com.emergency.dto;
 
 
 import java.io.Serializable;

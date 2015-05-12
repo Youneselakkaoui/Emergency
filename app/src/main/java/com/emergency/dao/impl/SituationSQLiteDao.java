@@ -1,10 +1,11 @@
-package com.emergency.dao;
+package com.emergency.dao.impl;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.emergency.dao.SituationDao;
 import com.emergency.entity.Situation;
 import com.emergency.helpers.DatabaseHelper;
 
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by Noureddine on 19/04/2015.
  */
-public class SituationSQLiteDao implements SituationDao{
+public class SituationSQLiteDao implements SituationDao {
     private SQLiteDatabase dbW;
     private SQLiteDatabase dbR;
     private DatabaseHelper databaseHelper;

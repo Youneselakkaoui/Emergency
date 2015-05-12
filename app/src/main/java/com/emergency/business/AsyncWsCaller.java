@@ -31,7 +31,6 @@ public class AsyncWsCaller<Parameter,Return> extends AsyncTask<Void, Void, Retur
     }
 
 
-
     @Override
     protected void onPostExecute(Return parameterOut) {
         listener.onTaskCompleted(parameterOut);

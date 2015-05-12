@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -22,16 +23,30 @@ import android.widget.Toast;
 
 
 import com.emergency.adapter.SampleAdapter;
+import com.emergency.business.AsyncWsCaller;
 import com.emergency.business.DefaultSituationManager;
+import com.emergency.business.OnTaskCompleted;
 import com.emergency.business.SituationManager;
+import com.emergency.dto.AlerteDTO;
+import com.emergency.dto.ManageAlerteIn;
+import com.emergency.dto.ManageAlerteOut;
+import com.emergency.dto.ManageUserIn;
+import com.emergency.dto.ManageUserOut;
+import com.emergency.entity.Alerte;
+import com.emergency.entity.RecepteursSituation;
 import com.emergency.entity.Situation;
+import com.emergency.entity.SuiviAlerte;
 import com.emergency.helpers.GPSTracker;
+import com.emergency.util.EmergencyConstants;
 import com.etsy.android.grid.StaggeredGridView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements AbsListView.OnScrollListener,AbsListView.OnItemClickListener {
+public class HomeFragment extends Fragment implements AbsListView.OnScrollListener,
+                                                      AbsListView.OnItemClickListener,
+                                                      OnTaskCompleted<ManageAlerteOut> {
 
     public static final String SAVED_DATA_KEY = "SAVED_DATA";
     private SharedPreferences prefs = null;
@@ -42,6 +57,8 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     private String titre;
     private ArrayList<Situation> mData;
     private GPSTracker gps;
+    private AlerteDTO alerte;
+
 
 	public HomeFragment(){
 
@@ -90,9 +107,30 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
         Situation s = situationManager.getAll().get(position);
         // check if GPS enabled
         if(gps.canGetLocation()){
+            alerte = new AlerteDTO();
+            alerte.setDateEnvoi(new Date());
 
             double latitude = gps.getLatitude();
             double longitude = gps.getLongitude();
+
+            alerte.setLocalisationEmX(gps.getLatitude() + "");
+            alerte.setLocalisationEmY(gps.getLongitude() +  "");
+
+            alerte.setSituation(s);
+            alerte.setStatut((short)0);
+
+            List<SuiviAlerte> suivies = new ArrayList<SuiviAlerte>();
+            List<RecepteursSituation> rs = s.getRecepteursSituations();
+
+            for (int i = 0; i < rs.size(); i++) {
+                SuiviAlerte sa = new SuiviAlerte();
+                sa.setAlerte(alerte);
+                suivies.add(sa);
+            }
+
+            alerte.setSuiviAlertes(suivies);
+            //
+            alerte.setPieceJointes(null);
 
             // \n is for new line
             Toast.makeText(getActivity().getApplicationContext(),
@@ -106,7 +144,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
         }
-        Toast.makeText(getActivity(), "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -152,5 +190,22 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
             prefs.edit().putBoolean("firstRun", false).commit();
 
         }
+    }
+
+    public void saveAlerte() {
+        new AsyncWsCaller<ManageAlerteIn,ManageAlerteOut>(getActivity(),getAlerte(),ManageAlerteOut.class, EmergencyConstants.MANAGE_USER_URL).execute();
+    }
+
+    public ManageAlerteIn getAlerte() {
+        ManageAlerteIn man = new ManageAlerteIn();
+        man.setCodeFonction((short)1);
+        man.setAlerteDTO(alerte);
+
+        return man;
+    }
+
+    @Override
+    public void onTaskCompleted(ManageAlerteOut manageUserOut) {
+
     }
 }

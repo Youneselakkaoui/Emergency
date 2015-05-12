@@ -3,7 +3,7 @@ package com.emergency.business;
 import android.content.Context;
 
 import com.emergency.dao.SituationDao;
-import com.emergency.dao.SituationSQLiteDao;
+import com.emergency.dao.impl.SituationSQLiteDao;
 import com.emergency.entity.Situation;
 
 import java.util.List;

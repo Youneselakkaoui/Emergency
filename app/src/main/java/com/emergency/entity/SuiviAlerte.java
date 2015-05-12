@@ -1,5 +1,7 @@
 package com.emergency.entity;
 
+import com.emergency.dto.AlerteDTO;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -54,7 +56,7 @@ public class SuiviAlerte implements Serializable {
 		return this.user;
 	}
 
-	public void setAlerte(final Alerte alerte) {
+	public void setAlerte(final AlerteDTO alerte) {
 		this.alerte = alerte;
 	}
 
