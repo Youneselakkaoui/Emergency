@@ -79,7 +79,7 @@ public class HomeActivity extends ActionBarActivity
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new FindPeopleFragment();
+                fragment = new ManageUserFragment();
                 break;
             case 2:
                 fragment = new PhotosFragment();

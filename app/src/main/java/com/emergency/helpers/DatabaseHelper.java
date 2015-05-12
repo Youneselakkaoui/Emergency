@@ -18,6 +18,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.emergency.entity.Situation;
+import com.emergency.entity.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
@@ -53,9 +54,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    //         "  `type_envoi` SMALLINT(1) NULL,";
             + ");";
 
+    private static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER+ " ( "
+            + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
+            + User.USER_NOM + " CHAR(30) NOT NULL, "
+            + User.USER_PRENOM + " CHAR(30) NOT NULL, "
+            + User.USER_DATENAISSANCE + " DATE, "
+            + User.USER_SEXE + " SMALLINT(1), "
+            + User.USER_GROUPESANGUIN + " SMALLINT(1), "
+            + User.USER_DIABETE + " SMALLINT(1), "
+            + User.USER_CHOLESTEROL + " SMALLINT(1), "
+            + User.USER_AUTRESINFOS + " TEXT(500) "
+            + ");"
+            ;
+
    @Override
    public void onCreate(SQLiteDatabase dbo) {
        dbo.execSQL(CREATE_TABLE_SITUATION);
+       dbo.execSQL(CREATE_TABLE_USER);
        dbo.execSQL("INSERT INTO "+ Situation.TABLE_SITUATION + " ("
                + Situation.SITUATION_ID_EMETTEUR     + ","
                + Situation.SITUATION_TITRE           + ","
