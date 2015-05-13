@@ -66,4 +66,18 @@
     <string name="manage_user_selectdate">Selectionner une date</string>
     <string name="drawer_open" >Open</string>
     <string name="drawer_close" >Close</string>
+
+    <string name="msg_aletre">Message alerte</string>
+    <string name="fichiers_joints">Fichiers joints</string>
+    <string name="type_envoie">Type envoie</string>
+    <string name="btn_suivant">Suivant</string>
+    <string name="lst_contacts">Liste contacte</string>
+    <string name="telephone">Telephone</string>
+    <string name="cr_situation">Compte Rendu Situation</string>
+    <string name="cration_situation">Création Situation</string>
+    <string name="btn_valider">Valider</string>
+    <string name="btn_retour">Retour</string>
+    <string name="lst_contact">Contact</string>
+    <string name="nom">Nom : </string>
+    <string name="prenom">Prénom : </string>
 </resources>
