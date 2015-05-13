@@ -110,7 +110,7 @@ public class Alerte implements Serializable {
 
     public SuiviAlerte addSuiviAlerte(SuiviAlerte suiviAlerte) {
         getSuiviAlertes().add(suiviAlerte);
-        suiviAlerte.setAlerte(this);
+        //suiviAlerte.setAlerte(this);
 
         return suiviAlerte;
     }

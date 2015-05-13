@@ -9,13 +9,11 @@ import java.util.List;
  */
 public interface UserDao {
 
-    public int insert(User situation);
+    public int insert(User user);
 
-    public int update(User situation);
+    public int update();
 
-    public int delete(User situation);
-
-    public User select(String telephone);
+    public int delete();
 
     public User selectUser();
 }

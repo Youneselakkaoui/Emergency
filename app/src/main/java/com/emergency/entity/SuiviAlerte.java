@@ -13,7 +13,7 @@ import java.util.Date;
 public class SuiviAlerte implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Alerte alerte;
+    private AlerteDTO alerte;
 
     private Date dateMaj;
 
@@ -30,7 +30,7 @@ public class SuiviAlerte implements Serializable {
     public SuiviAlerte() {
     }
 
-    public Alerte getAlerte() {
+    public AlerteDTO getAlerte() {
         return this.alerte;
     }
 

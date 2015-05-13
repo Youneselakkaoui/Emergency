@@ -22,7 +22,7 @@ public class SituationActivity extends ActionBarActivity implements View.OnClick
 
         Button btnSuivant = (Button) findViewById(R.id.btn_suivant);
         titreText = (EditText) findViewById(R.id.situation_title);
-        descText = (EditText) findViewById(R.id.situation_desc);
+        descText = (EditText) findViewById(R.id.message);
 
         btnSuivant.setOnClickListener(this);
     }
