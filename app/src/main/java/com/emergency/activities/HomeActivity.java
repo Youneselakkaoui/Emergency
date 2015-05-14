@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -30,7 +32,12 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        // Config parse pour notifications
+        Parse.initialize(this, "cvMqF0AbnLe6dcXabs9PmJljZEugl2n209eAym8l", "fFYyLG021idgbRzPl1e75pCr3ZkvyPpsosTzc9NQ");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+        // Config parse fin
         setContentView(R.layout.activity_home);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
@@ -85,7 +92,7 @@ public class HomeActivity extends ActionBarActivity
                 fragment = new CreateUserFragment();
                 break;
             case 3:
-                fragment = new ManageUserFragment();
+                fragment = new GoogleMapActivity();
                 break;
             case 4:
                 fragment = new ManageSituation();

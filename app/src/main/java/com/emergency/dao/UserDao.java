@@ -11,7 +11,7 @@ public interface UserDao {
 
     public int insert(User user);
 
-    public int update();
+    public int update(User user);
 
     public int delete();
 

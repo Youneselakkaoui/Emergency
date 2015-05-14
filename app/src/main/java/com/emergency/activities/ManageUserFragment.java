@@ -21,6 +21,7 @@ import com.emergency.business.impl.UserManagerImpl;
 import com.emergency.dto.ManageUserIn;
 import com.emergency.dto.ManageUserOut;
 import com.emergency.dto.UserDTO;
+import com.emergency.entity.User;
 import com.emergency.util.UserUtil;
 
 import java.text.DateFormat;
@@ -31,9 +32,11 @@ import java.util.logging.Logger;
 public class ManageUserFragment extends Fragment implements OnTaskCompleted<ManageUserOut> {
     private View rootView;
     private UserManager userManager;
+    private User currentUser = new User();
 
     public ManageUserFragment() {
         userManager = new UserManagerImpl(getActivity());
+        currentUser = userManager.getUser();
     }
 
     DateFormat fmtDateAndTime = DateFormat.getDateInstance();
@@ -74,7 +77,7 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
             @Override
             public void onClick(View v) {
 
-                saveUser();
+                updateUser();
             }
         });
 
@@ -97,7 +100,7 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         return rootView;
     }
 
-    public void saveUser() {
+    public void updateUser() {
         userManager.create(UserUtil.mapUser(getUser()));
         Logger.getAnonymousLogger().log(Level.INFO, "userAdded : ", userManager.getUser());
         //new AsyncWsCaller<ManageUserIn,ManageUserOut>(this,getUser(),ManageUserOut.class,
