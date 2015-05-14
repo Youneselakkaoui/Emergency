@@ -9,6 +9,7 @@ import com.emergency.dao.UserDao;
 import com.emergency.entity.User;
 import com.emergency.helpers.DatabaseHelper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,16 +52,28 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int update(User user) {
-        return 0;
+
+        ContentValues cv = new ContentValues();
+        cv.put(User.USER_AUTRESINFOS, user.getAutresInfos());
+        cv.put(User.USER_CHOLESTEROL, user.getCholesterol());
+        cv.put(User.USER_DATENAISSANCE, user.getDateNaissance().getTime());
+        cv.put(User.USER_DIABETE, user.getDiabete());
+        cv.put(User.USER_GROUPESANGUIN, user.getGroupSanguin());
+        cv.put(User.USER_NOM, user.getNom());
+        cv.put(User.USER_PRENOM, user.getPrenom());
+        cv.put(User.USER_SEXE, user.getSexe());
+
+        return dbW.update(User.TABLE_USER, cv, User.USER_TELEPHONE + "= ?", new String[]{user.getTelephone()});
     }
 
     @Override
-    public int delete(User user) {
+    public int delete() {
         return 0;
     }
 
+
     @Override
-    public User select(String telephone) {
+    public User selectUser() {
         User s = null;
 
         String selectQuery = "SELECT  * FROM " + User.TABLE_USER;
@@ -80,30 +93,31 @@ public class UserDaoImpl implements UserDao {
                 new String[]{null,null,null,null, null, null, null, null,telephone};*/
         if (cursor != null) {
             cursor.moveToFirst();
-            System.out.println("cursor.getString(0)" + cursor.getString(0));
-            System.out.println("cursor.getString(1)" + cursor.getString(1));
-            System.out.println("cursor.getString(2)" + cursor.getString(2));
-            System.out.println("cursor.getString(3)" + cursor.getString(3));
-            System.out.println("cursor.getString(4)" + cursor.getString(4));
-            System.out.println("cursor.getString(5)" + cursor.getString(5));
-            System.out.println("cursor.getString(6)" + cursor.getString(6));
-            System.out.println("cursor.getString(7)" + cursor.getString(7));
-            System.out.println("cursor.getString(8)" + cursor.getString(8));
-       /* s = new User(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                Short.parseShort(cursor.getString(4)),
-                Short.parseShort(cursor.getString(5)));*/
+            //System.out.println("cursor.getString(0)" + cursor.getString(0)); //telephone
+            //System.out.println("cursor.getString(1)" + cursor.getString(1)); //nom
+            //System.out.println("cursor.getString(2)" + cursor.getString(2)); //prenom
+            //System.out.println("cursor.getString(3)" + cursor.getString(3)); //date naiss
+            //System.out.println("cursor.getString(4)" + cursor.getString(4)); //sexe
+            //System.out.println("cursor.getString(5)" + cursor.getString(5)); //grpe sanguin
+            //System.out.println("cursor.getString(6)" + cursor.getString(6)); //diabete
+            //System.out.println("cursor.getString(7)" + cursor.getString(7)); //cholesterol
+            //System.out.println("cursor.getString(8)" + cursor.getString(8)); //autres infos
+            s = new User(
+                    cursor.getString(0), //telephone
+                    cursor.getString(8), //autresInfos
+                    Short.parseShort(cursor.getString(7)), //cholesterol
+                    new Date(Long.parseLong(cursor.getString(3))), //dateNaissance
+                    Short.parseShort(cursor.getString(6)), //diabete
+                    Short.parseShort(cursor.getString(5)), //groupSanguin
+                    cursor.getString(1), //nom
+                    cursor.getString(2), //prenom
+                    Short.parseShort(cursor.getString(4)) //sexe
+            );
+            cursor.close();
         }
+
         // return contact
         return s;
 
-
-    }
-
-    @Override
-    public User selectUser() {
-        return select(null);
     }
 }

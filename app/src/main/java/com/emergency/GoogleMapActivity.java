@@ -1,42 +1,24 @@
-package com.emergency.activities;
+package com.emergency;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.emergency.activities.R;
 
-public class SituationActivity extends ActionBarActivity implements View.OnClickListener {
-    private EditText titreText, descText;
+public class GoogleMapActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_situation);
-
-        Button btnSuivant = (Button) findViewById(R.id.btn_suivant);
-        titreText = (EditText) findViewById(R.id.situation_title);
-        descText = (EditText) findViewById(R.id.message);
-
-        btnSuivant.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        Log.d("SITUATION TITRE: ", titreText.getText().toString());
-        Log.d("SITUATION DESC: ", descText.getText().toString());
+        setContentView(R.layout.activity_google_map);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_situation, menu);
+        getMenuInflater().inflate(R.menu.menu_google_map, menu);
         return true;
     }
 

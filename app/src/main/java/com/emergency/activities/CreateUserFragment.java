@@ -1,9 +1,11 @@
 package com.emergency.activities;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Fragment;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +23,6 @@ import com.emergency.business.impl.UserManagerImpl;
 import com.emergency.dto.ManageUserIn;
 import com.emergency.dto.ManageUserOut;
 import com.emergency.dto.UserDTO;
-import com.emergency.entity.User;
 import com.emergency.util.UserUtil;
 
 import java.text.DateFormat;
@@ -29,14 +30,17 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ManageUserFragment extends Fragment implements OnTaskCompleted<ManageUserOut> {
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ */
+public class CreateUserFragment extends Fragment implements OnTaskCompleted<ManageUserOut> {
     private View rootView;
     private UserManager userManager;
-    private User currentUser = new User();
 
-    public ManageUserFragment() {
+    public CreateUserFragment() {
         userManager = new UserManagerImpl(getActivity());
-        currentUser = userManager.getUser();
     }
 
     DateFormat fmtDateAndTime = DateFormat.getDateInstance();
@@ -61,7 +65,7 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_manage_user, container, false);
+        rootView = inflater.inflate(R.layout.fragment_create_user, container, false);
         Spinner spinner = (Spinner) rootView.findViewById(R.id.bloodtype_spinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -77,7 +81,7 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
             @Override
             public void onClick(View v) {
 
-                updateUser();
+                saveUser();
             }
         });
 
@@ -100,7 +104,7 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         return rootView;
     }
 
-    public void updateUser() {
+    public void saveUser() {
         userManager.create(UserUtil.mapUser(getUser()));
         Logger.getAnonymousLogger().log(Level.INFO, "userAdded : ", userManager.getUser());
         //new AsyncWsCaller<ManageUserIn,ManageUserOut>(this,getUser(),ManageUserOut.class,
@@ -126,4 +130,5 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
         return manageUserIn;
     }
+
 }

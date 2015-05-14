@@ -41,7 +41,15 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String telephone, String autresInfos, short cholesterol, Date dateNaissance, short diabete, short groupSanguin, String nom, String prenom, short sexe) {
+    public User(String telephone,
+                String autresInfos,
+                short  cholesterol,
+                Date   dateNaissance,
+                short  diabete,
+                short  groupSanguin,
+                String nom,
+                String prenom,
+                short  sexe) {
         this.telephone = telephone;
         this.autresInfos = autresInfos;
         this.cholesterol = cholesterol;

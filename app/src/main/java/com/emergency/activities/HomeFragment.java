@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         //view.setBackgroundColor(Color.parseColor("#ffaf3f"));
-        Intent intent = new Intent(getActivity().getApplicationContext(), EtatAlerteActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), SituationCompteRenduActivity.class);
         // create class object
         gps = new GPSTracker(getActivity());
         Situation s = situationManager.getAll().get(position);
@@ -193,7 +193,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     }
 
     public void saveAlerte() {
-        new AsyncWsCaller<ManageAlerteIn, ManageAlerteOut>(getActivity(), getAlerte(), ManageAlerteOut.class, EmergencyConstants.MANAGE_USER_URL).execute();
+        new AsyncWsCaller<ManageAlerteIn, ManageAlerteOut>(this, getAlerte(), ManageAlerteOut.class, EmergencyConstants.MANAGE_USER_URL).execute();
     }
 
     public ManageAlerteIn getAlerte() {

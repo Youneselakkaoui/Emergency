@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * The persistent class for the alerte database table.
  */
-public class AlerteDTO implements Serializable, EmergencyDTO {
+public class AlerteDTO extends EmergencyDTO implements Serializable  {
     private static final long serialVersionUID = 1L;
 
     private int idAlerte;
@@ -92,7 +92,7 @@ public class AlerteDTO implements Serializable, EmergencyDTO {
 
     public PieceJointe addPieceJointe(PieceJointe pieceJointe) {
         getPieceJointes().add(pieceJointe);
-        pieceJointe.setAlerte(this);
+        //pieceJointe.setAlerte(this);
 
         return pieceJointe;
     }
