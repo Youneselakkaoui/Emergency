@@ -1,6 +1,7 @@
 package com.emergency.util;
 
 import com.emergency.dto.ManageUserIn;
+import com.emergency.dto.UserDTO;
 import com.emergency.entity.User;
 
 /**
@@ -8,7 +9,7 @@ import com.emergency.entity.User;
  */
 public class UserUtil {
 
-    public static User mapUser(ManageUserIn userIn) {
+    public static User mapUser(ManageUserIn userIn, short me) {
         User user = new User();
         user.setDateNaissance(userIn.getUserDTO().getDateNaissance());
         user.setTelephone(userIn.getUserDTO().getTelephone());
@@ -19,6 +20,24 @@ public class UserUtil {
         user.setDiabete(userIn.getUserDTO().getDiabete());
         user.setGroupSanguin(userIn.getUserDTO().getGroupSanguin());
         user.setSexe(userIn.getUserDTO().getSexe());
+        user.setGcmDeviceId(userIn.getUserDTO().getGcmDeviceId());
+        user.setMe(me);
+        return user;
+    }
+
+    public static User mapUserDtoToUser (UserDTO userDTO, short me){
+        User user = new User();
+        user.setDateNaissance(userDTO.getDateNaissance());
+        user.setTelephone(userDTO.getTelephone());
+        user.setPrenom(userDTO.getPrenom());
+        user.setNom(userDTO.getNom());
+        user.setAutresInfos(userDTO.getAutresInfos());
+        user.setCholesterol(userDTO.getCholesterol());
+        user.setDiabete(userDTO.getDiabete());
+        user.setGroupSanguin(userDTO.getGroupSanguin());
+        user.setSexe(userDTO.getSexe());
+        user.setGcmDeviceId(userDTO.getGcmDeviceId());
+        user.setMe(me);
         return user;
     }
 }

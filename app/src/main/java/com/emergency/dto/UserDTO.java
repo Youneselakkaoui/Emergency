@@ -27,7 +27,16 @@ public class UserDTO extends EmergencyDTO {
 
     private String telephone;
 
-    public String getAutresInfos() {
+    private String gcmDeviceId;
+
+    public String getGcmDeviceId() {
+        return this.gcmDeviceId;
+    }
+    public void setGcmDeviceId(String gcmDeviceId) {
+        this.gcmDeviceId = gcmDeviceId;
+    }
+
+        public String getAutresInfos() {
         return this.autresInfos;
     }
 

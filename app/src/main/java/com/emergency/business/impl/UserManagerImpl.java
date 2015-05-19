@@ -30,7 +30,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public boolean edit(User s) {
-        return false;
+        return userDao.update(s) > 0;
     }
 
     @Override
