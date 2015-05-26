@@ -43,11 +43,13 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="main_menu">
         <item >Home</item>
-        <item >Info. Personne</item>
-        <item >Etat Alerte</item>
-        <item >Etat Demande</item>
-        <item >Gestion des situations</item>
+        <item >Infos. Personnelle</item>
+        <item >Alertes reçues</item>
+        <item >Demandes (envoyées)</item>
+        <item >Situations</item>
         <item >Preferences</item>
+        <item >A propos</item>
+        <item >Déconnexion</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
