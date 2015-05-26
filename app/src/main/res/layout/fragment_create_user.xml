@@ -17,20 +17,40 @@
                 android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/manage_user_nom"
-                android:id="@+id/labelnom"
+                android:id="@+id/labeltel"
                 android:layout_column="1" />
-
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/manage_user_nom"
+                android:layout_weight=".25"
+                android:inputType="number"
+                android:hint="@string/create_user_indicatif"
                 android:ems="7"
-                android:id="@+id/textNom" />
-
+                android:id="@+id/textIndicatif" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/manage_user_zero"
+                android:id="@+id/labelprenom"
+                android:layout_column="1" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:inputType="phone"
+                android:hint="@string/manage_user_phone"
+                android:ems="7"
+                android:id="@+id/textPhone" />
         </TableRow>
 
-        <TableRow
+ <!--       <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
@@ -170,7 +190,7 @@
                 style="@android:style/Widget.DeviceDefault.DropDownItem.Spinner" />
 
 
-        </TableRow>
+        </TableRow>-->
 
         <TableRow
             android:layout_width="fill_parent"

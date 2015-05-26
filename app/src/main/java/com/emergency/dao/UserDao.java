@@ -6,7 +6,9 @@ import java.util.List;
 
 /**
  * Created by elmehdiharabida on 25/04/2015.
+ * Utilisé pour propriétaire uniquement
  */
+
 public interface UserDao {
 
     public int insert(User user);

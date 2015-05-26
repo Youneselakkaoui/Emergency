@@ -2,6 +2,7 @@ package com.emergency.business;
 
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class AsyncWsCaller<Parameter, Return> extends AsyncTask<Void, Void, Retu
         try {
             manageUserOut = (Return) restTemplate.postForObject(url, parameterIn, returnClassType);
         } catch (Exception e) {
-            Logger.getAnonymousLogger().log(Level.INFO, e.getMessage());
+            Log.e("com.emergency.emergency", e.getMessage());
         }
         return manageUserOut;
     }

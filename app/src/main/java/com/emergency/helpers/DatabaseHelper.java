@@ -56,14 +56,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER + " ( "
             + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
-            + User.USER_NOM + " CHAR(30) NOT NULL, "
-            + User.USER_PRENOM + " CHAR(30) NOT NULL, "
+            + User.USER_NOM + " CHAR(30), "
+            + User.USER_PRENOM + " CHAR(30), "
             + User.USER_DATENAISSANCE + " DATE, "
             + User.USER_SEXE + " SMALLINT(1), "
             + User.USER_GROUPESANGUIN + " SMALLINT(1), "
             + User.USER_DIABETE + " SMALLINT(1), "
             + User.USER_CHOLESTEROL + " SMALLINT(1), "
-            + User.USER_AUTRESINFOS + " TEXT(500) "
+            + User.USER_AUTRESINFOS + " TEXT(500), "
+            + User.USER_GCM_DEVICE_ID + " TEXT(200), "
+            + User.USER_ME + " SMALLINT(1) "
             + ");";
 
     @Override
@@ -167,6 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + Situation.TABLE_SITUATION);
+        db.execSQL("DROP TABLE IF EXISTS " + User.TABLE_USER);
 
         // create new tables
         onCreate(db);

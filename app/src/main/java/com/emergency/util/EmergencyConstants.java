@@ -21,7 +21,7 @@ public interface EmergencyConstants {
     /**
      * Path pour createUser
      */
-    String MANAGE_USER_URL = "http://10.0.2.2:8080/EmergencyWeb/service/emergency/manageUser";
+    String MANAGE_USER_URL = "http://equipe1.meditapps.com:8090/EmergencyWeb-0.0.1-SNAPSHOT/service/emergencyUser/manageUser";
 
 
 }

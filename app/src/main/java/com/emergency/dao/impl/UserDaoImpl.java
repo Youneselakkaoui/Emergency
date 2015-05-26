@@ -40,13 +40,17 @@ public class UserDaoImpl implements UserDao {
 
         values.put(User.USER_AUTRESINFOS, user.getAutresInfos());
         values.put(User.USER_CHOLESTEROL, user.getCholesterol());
-        values.put(User.USER_DATENAISSANCE, user.getDateNaissance().getTime());
+        if (user.getDateNaissance() != null) {
+            values.put(User.USER_DATENAISSANCE, user.getDateNaissance().getTime());
+        }
         values.put(User.USER_DIABETE, user.getDiabete());
         values.put(User.USER_GROUPESANGUIN, user.getGroupSanguin());
         values.put(User.USER_NOM, user.getNom());
         values.put(User.USER_PRENOM, user.getPrenom());
         values.put(User.USER_SEXE, user.getSexe());
         values.put(User.USER_TELEPHONE, user.getTelephone());
+        values.put(User.USER_GCM_DEVICE_ID, user.getGcmDeviceId());
+        values.put(User.USER_ME, user.getMe());
         return (int) dbW.insert(User.TABLE_USER, null, values);
     }
 
@@ -56,12 +60,16 @@ public class UserDaoImpl implements UserDao {
         ContentValues cv = new ContentValues();
         cv.put(User.USER_AUTRESINFOS, user.getAutresInfos());
         cv.put(User.USER_CHOLESTEROL, user.getCholesterol());
-        cv.put(User.USER_DATENAISSANCE, user.getDateNaissance().getTime());
+        if (user.getDateNaissance() != null) {
+            cv.put(User.USER_DATENAISSANCE, user.getDateNaissance().getTime());
+        }
         cv.put(User.USER_DIABETE, user.getDiabete());
         cv.put(User.USER_GROUPESANGUIN, user.getGroupSanguin());
         cv.put(User.USER_NOM, user.getNom());
         cv.put(User.USER_PRENOM, user.getPrenom());
         cv.put(User.USER_SEXE, user.getSexe());
+        cv.put(User.USER_GCM_DEVICE_ID, user.getGcmDeviceId());
+        cv.put(User.USER_ME, user.getMe());
 
         return dbW.update(User.TABLE_USER, cv, User.USER_TELEPHONE + "= ?", new String[]{user.getTelephone()});
     }
@@ -92,27 +100,30 @@ public class UserDaoImpl implements UserDao {
                 }, User.USER_TELEPHONE + "=?",
                 new String[]{null,null,null,null, null, null, null, null,telephone};*/
         if (cursor != null) {
-            cursor.moveToFirst();
-            //System.out.println("cursor.getString(0)" + cursor.getString(0)); //telephone
-            //System.out.println("cursor.getString(1)" + cursor.getString(1)); //nom
-            //System.out.println("cursor.getString(2)" + cursor.getString(2)); //prenom
-            //System.out.println("cursor.getString(3)" + cursor.getString(3)); //date naiss
-            //System.out.println("cursor.getString(4)" + cursor.getString(4)); //sexe
-            //System.out.println("cursor.getString(5)" + cursor.getString(5)); //grpe sanguin
-            //System.out.println("cursor.getString(6)" + cursor.getString(6)); //diabete
-            //System.out.println("cursor.getString(7)" + cursor.getString(7)); //cholesterol
-            //System.out.println("cursor.getString(8)" + cursor.getString(8)); //autres infos
-            s = new User(
-                    cursor.getString(0), //telephone
-                    cursor.getString(8), //autresInfos
-                    Short.parseShort(cursor.getString(7)), //cholesterol
-                    new Date(Long.parseLong(cursor.getString(3))), //dateNaissance
-                    Short.parseShort(cursor.getString(6)), //diabete
-                    Short.parseShort(cursor.getString(5)), //groupSanguin
-                    cursor.getString(1), //nom
-                    cursor.getString(2), //prenom
-                    Short.parseShort(cursor.getString(4)) //sexe
-            );
+            if (cursor.moveToFirst()) {
+                //System.out.println("cursor.getString(0)" + cursor.getString(0)); //telephone
+                //System.out.println("cursor.getString(1)" + cursor.getString(1)); //nom
+                //System.out.println("cursor.getString(2)" + cursor.getString(2)); //prenom
+                //System.out.println("cursor.getString(3)" + cursor.getString(3)); //date naiss
+                //System.out.println("cursor.getString(4)" + cursor.getString(4)); //sexe
+                //System.out.println("cursor.getString(5)" + cursor.getString(5)); //grpe sanguin
+                //System.out.println("cursor.getString(6)" + cursor.getString(6)); //diabete
+                //System.out.println("cursor.getString(7)" + cursor.getString(7)); //cholesterol
+                //System.out.println("cursor.getString(8)" + cursor.getString(8)); //autres infos
+                s = new User(
+                        cursor.getString(0), //telephone
+                        cursor.getString(8), //autresInfos
+                        Short.parseShort(cursor.getString(7)), //cholesterol
+                        cursor.getString(3) == null ? null: new Date(Long.parseLong(cursor.getString(3))), //dateNaissance
+                        Short.parseShort(cursor.getString(6)), //diabete
+                        Short.parseShort(cursor.getString(5)), //groupSanguin
+                        cursor.getString(1), //nom
+                        cursor.getString(2), //prenom
+                        Short.parseShort(cursor.getString(4)), //sexe
+                        cursor.getString(9),//GCM
+                        Short.parseShort(cursor.getString(10))//Me
+                );
+            }
             cursor.close();
         }
 

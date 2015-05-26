@@ -1,8 +1,10 @@
 package com.emergency.activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -11,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.emergency.business.AsyncWsCaller;
 import com.emergency.business.OnTaskCompleted;
 import com.emergency.business.UserManager;
 import com.emergency.business.impl.UserManagerImpl;
@@ -22,7 +27,10 @@ import com.emergency.dto.ManageUserIn;
 import com.emergency.dto.ManageUserOut;
 import com.emergency.dto.UserDTO;
 import com.emergency.entity.User;
+import com.emergency.util.EmergencyConstants;
 import com.emergency.util.UserUtil;
+
+import org.springframework.util.StringUtils;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -32,7 +40,7 @@ import java.util.logging.Logger;
 public class ManageUserFragment extends Fragment implements OnTaskCompleted<ManageUserOut> {
     private View rootView;
     private UserManager userManager;
-    private User currentUser = new User();
+    private User currentUser;
 
     public ManageUserFragment() {
         userManager = new UserManagerImpl(getActivity());
@@ -96,18 +104,32 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
 
         Logger.getAnonymousLogger().log(Level.INFO, "phone number : ", mTelephonyMgr.getLine1Number());
         ((TextView) rootView.findViewById(R.id.textTelephone)).setText(mTelephonyMgr.getLine1Number());
-
+        fillUser(currentUser);
         return rootView;
     }
 
     public void updateUser() {
-        userManager.create(UserUtil.mapUser(getUser()));
-        Logger.getAnonymousLogger().log(Level.INFO, "userAdded : ", userManager.getUser());
-        //new AsyncWsCaller<ManageUserIn,ManageUserOut>(this,getUser(),ManageUserOut.class,
-        //                                            EmergencyConstants.MANAGE_USER_URL).execute();
+
+        new AsyncWsCaller<ManageUserIn, ManageUserOut>(this, getUser(), ManageUserOut.class,
+                EmergencyConstants.MANAGE_USER_URL).execute();
     }
 
     public void onTaskCompleted(ManageUserOut manageUserOut) {
+        if (manageUserOut != null && manageUserOut.getAnomalie() == null) {
+            userManager.edit(UserUtil.mapUser(getUser(), (short) 1));
+            Logger.getAnonymousLogger().log(Level.INFO, "userUpdated : ", userManager.getUser());
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle("Oops...");
+            alertDialog.setMessage(getResources().getString(R.string.servercall_error));
+            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                // here you can add functions
+                }
+            });
+            alertDialog.setIcon(R.drawable.ic_communities);
+            alertDialog.show();
+        }
 
     }
 
@@ -123,7 +145,43 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         manageUserIn.getUserDTO().setPrenom(String.valueOf((
                 (TextView) rootView.findViewById(R.id.textprenom)).getText()));
         manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
+        manageUserIn.getUserDTO().setGroupSanguin((short) ((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).getSelectedItemId());
+        manageUserIn.getUserDTO().setGcmDeviceId(currentUser.getGcmDeviceId());
         //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
         return manageUserIn;
+    }
+
+    private void fillUser(User user) {
+        ((EditText) rootView.findViewById(R.id.textTelephone)).setText(user.getTelephone());
+        ((EditText) rootView.findViewById(R.id.textNom)).setText(user.getNom());
+        ((EditText) rootView.findViewById(R.id.textprenom)).setText(user.getPrenom());
+        if (user.getDateNaissance() != null) {
+            myCalendar.setTime(user.getDateNaissance());
+            //((EditText) rootView.findViewById(R.id.textDtNaiss)).setText(user.getDateNaissance().toString());
+            updateLabel();
+        }
+        if (1 == user.getSexe())
+            ((RadioButton) rootView.findViewById(R.id.radiohomme)).setChecked(true);
+        if (2 == user.getSexe())
+            ((RadioButton) rootView.findViewById(R.id.radiofemme)).setChecked(true);
+        //switch (user.getGroupSanguin()){
+        //   case (short)1 :
+        ((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).setSelection(user.getGroupSanguin());
+        //}
+
+        //String bloodType = String.valueOf(((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).getSelectedItemId());
+
+        //manageUserIn.setCodeFonction((short) 1);
+        //manageUserIn.setUserDTO(new UserDTO());
+        //(TextView) rootView.findViewById(R.id.textTelephone).setT("");
+        //manageUserIn.getUserDTO().setTelephone(String.valueOf((
+        //        (TextView) rootView.findViewById(R.id.textTelephone)).getText()));
+        //manageUserIn.getUserDTO().setNom(String.valueOf((
+        //       (TextView) rootView.findViewById(R.id.textNom)).getText()));
+        //manageUserIn.getUserDTO().setPrenom(String.valueOf((
+        //       (TextView) rootView.findViewById(R.id.textprenom)).getText()));
+        // manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
+        //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
+        //return manageUserIn;
     }
 }
