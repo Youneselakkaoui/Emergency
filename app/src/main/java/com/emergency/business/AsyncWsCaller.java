@@ -38,7 +38,9 @@ public class AsyncWsCaller<Parameter, Return> extends AsyncTask<Void, Void, Retu
         Return manageUserOut = null;
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         try {
+
             manageUserOut = (Return) restTemplate.postForObject(url, parameterIn, returnClassType);
+
         } catch (Exception e) {
             Log.e("com.emergency.emergency", e.getMessage());
         }
@@ -50,4 +52,11 @@ public class AsyncWsCaller<Parameter, Return> extends AsyncTask<Void, Void, Retu
     protected void onPostExecute(Return parameterOut) {
         listener.onTaskCompleted(parameterOut);
     }
+
+    @Override
+    protected void onPreExecute() {
+        listener.onPreExecute();
+    }
+
+
 }

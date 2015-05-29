@@ -112,6 +112,11 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
 
     }
 
+    @Override
+    public void onPreExecute() {
+
+    }
+
     private ManageUserIn getUser() {
         ManageUserIn manageUserIn = new ManageUserIn();
         manageUserIn.setCodeFonction((short) 1);

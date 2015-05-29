@@ -1,6 +1,8 @@
 package com.emergency.entity;
 
-import java.io.Serializable;
+import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +11,8 @@ import java.util.List;
  * The persistent class for the user database table.
  */
 
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class User extends SugarRecord<User> {
+
     // table name
     public static final String TABLE_USER = "user";
     //columns
@@ -25,7 +27,21 @@ public class User implements Serializable {
     public static final String USER_SEXE = "sexe";
     public static final String USER_GCM_DEVICE_ID = "gcm_device_id";
     public static final String USER_ME = "me";
-
+    public static final String USER_DIGITS_ID = "digits_id";
+    public static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER + " ( "
+            + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
+            + User.USER_NOM + " CHAR(30), "
+            + User.USER_PRENOM + " CHAR(30), "
+            + User.USER_DATENAISSANCE + " DATE, "
+            + User.USER_SEXE + " SMALLINT(1), "
+            + User.USER_GROUPESANGUIN + " SMALLINT(1), "
+            + User.USER_DIABETE + " SMALLINT(1), "
+            + User.USER_CHOLESTEROL + " SMALLINT(1), "
+            + User.USER_AUTRESINFOS + " TEXT(500), "
+            + User.USER_GCM_DEVICE_ID + " TEXT(200), "
+            + User.USER_ME + " SMALLINT(1), "
+            + User.USER_DIGITS_ID + " BIGINT(20) "
+            + ");";
 
     private String telephone;
     private String autresInfos;
@@ -38,9 +54,21 @@ public class User implements Serializable {
     private short sexe;
     private String gcmDeviceId;
     private short me;
+    @Ignore
     private List<RecepteursSituation> recepteursSituations;
+    @Ignore
     private List<Situation> situations;
+    @Ignore
     private List<SuiviAlerte> suiviAlertes;
+    private long digitsId;
+
+    public long getDigitsId() {
+        return digitsId;
+    }
+
+    public void setDigitsId(long digitsId) {
+        this.digitsId = digitsId;
+    }
 
     public User() {
     }
@@ -55,7 +83,8 @@ public class User implements Serializable {
                 String prenom,
                 short  sexe,
                 String gcmDeviceId,
-                short me) {
+                short me,
+                long digitsId) {
         this.telephone = telephone;
         this.autresInfos = autresInfos;
         this.cholesterol = cholesterol;
@@ -67,6 +96,7 @@ public class User implements Serializable {
         this.sexe = sexe;
         this.gcmDeviceId = gcmDeviceId;
         this.me = me;
+        this.digitsId=digitsId;
     }
     public String getGcmDeviceId() {
         return this.gcmDeviceId;

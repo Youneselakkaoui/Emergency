@@ -14,8 +14,8 @@ public class UserManagerImpl implements UserManager {
 
     private UserDao userDao;
 
-    public UserManagerImpl(Context c) {
-        this.userDao = new UserDaoImpl(c);
+    public UserManagerImpl() {
+        this.userDao = new UserDaoImpl();
     }
 
     @Override
@@ -34,7 +34,8 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(User user) {
+        userDao.delete(user);
 
     }
 }

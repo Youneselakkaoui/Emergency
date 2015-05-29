@@ -37,7 +37,9 @@ public class UserUtil {
         user.setGroupSanguin(userDTO.getGroupSanguin());
         user.setSexe(userDTO.getSexe());
         user.setGcmDeviceId(userDTO.getGcmDeviceId());
+        user.setDigitsId(userDTO.getDigitsId());
         user.setMe(me);
+
         return user;
     }
 }

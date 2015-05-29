@@ -91,6 +91,10 @@
     <string name="title_activity_google_map">GoogleMapActivity</string>
 
     <string name="notification_received">Requête urgente de </string>
+    <string name="inProgress">Enregistrement en cours ...</string>
+    <string name="manage_user_other">Autres</string>
+    <string name="manage_user_other_hint">Saisir ici les détails de votre dossier médical</string>
+    <string name="create_user_abstract">Emergency est une application créée by MedIT apps challenge team, pour aider les utilisateurs à contacter les bonnes personnes au bon moment, partout dans le monde. The app uses a mobile phone\'s GPS functionality so callers can provide emergency call-takers with their location information as determined by their smart phone.\n Please provide your phone number so you can signup to the application. </string>
 
     <string-array name="CountryCodes" >
         <item>93,AF</item>
@@ -300,4 +304,7 @@
         <item>260,ZM</item>
         <item>263,ZW</item>
     </string-array>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="titre_confirmation_close">Quitter</string>
+    <string name="texte_confirmation_close">Voulez-vous vraiment quitter l\'application ?</string>
 </resources>

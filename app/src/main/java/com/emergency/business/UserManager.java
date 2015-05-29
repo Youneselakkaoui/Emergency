@@ -12,5 +12,5 @@ public interface UserManager {
 
     public boolean edit(User s);
 
-    public void remove(int id);
+    public void remove(User user);
 }

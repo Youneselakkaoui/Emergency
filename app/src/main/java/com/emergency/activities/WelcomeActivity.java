@@ -1,6 +1,8 @@
 package com.emergency.activities;
 
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,13 +12,19 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.telephony.TelephonyManager;
+import android.os.PersistableBundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.app.AlertDialog;
+import android.view.View;
+import android.view.Window;
+import android.widget.LinearLayout;
+
+import com.crashlytics.android.Crashlytics;
+import com.digits.sdk.android.AuthCallback;
+import com.digits.sdk.android.Digits;
+import com.digits.sdk.android.DigitsAuthButton;
+import com.digits.sdk.android.DigitsException;
+import com.digits.sdk.android.DigitsSession;
 import com.emergency.business.AsyncWsCaller;
 import com.emergency.business.OnTaskCompleted;
 import com.emergency.business.UserManager;
@@ -29,17 +37,21 @@ import com.emergency.util.UserUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import io.fabric.sdk.android.Fabric;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  */
-public class CreateUserFragment extends ActionBarActivity implements OnTaskCompleted<ManageUserOut> {
+public class WelcomeActivity extends Activity  {
 
     private UserManager userManager;
 
@@ -53,35 +65,24 @@ public class CreateUserFragment extends ActionBarActivity implements OnTaskCompl
     private String regId;
     Context context;
 
+    public WelcomeActivity() {
+        userManager = new UserManagerImpl();
+        //
 
-    public CreateUserFragment() {
-        userManager = new UserManagerImpl(this);
     }
 
-    /*DateFormat fmtDateAndTime = DateFormat.getDateInstance();
-    TextView lblDateAndTime;
-    Calendar myCalendar = Calendar.getInstance();
-
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-        }
-    };
-
-    private void updateLabel() {
-        lblDateAndTime.setText(fmtDateAndTime.format(myCalendar.getTime()));
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //parse debut
+
+
+
         context = getApplicationContext();
+
+
+
 
         // Check device for Play Services APK. If check succeeds, proceed with GCM registration.
         if (checkPlayServices()) {
@@ -94,114 +95,36 @@ public class CreateUserFragment extends ActionBarActivity implements OnTaskCompl
         } else {
             Log.i(TAG, "No valid Google Play Services APK found.");
         }
-        // Config parse fin
+        checkUserRegistered();
 
-        setContentView(R.layout.fragment_create_user);
-        /*Spinner spinner = (Spinner) rootView.findViewById(R.id.bloodtype_spinner);
+        //digitsButton
+        //        .setAuthTheme(android.R.style.Theme_Material);
+        //digitsButton.performClick();
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.manage_user_bloodtypes, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);*/
-        EditText countryCodeText = (EditText) findViewById(R.id.textIndicatif);
-        countryCodeText.setText(GetCountryZipCode());
+        //if (savedInstanceState != null && "ERROR".equals(savedInstanceState.getString("ERROR"))) {
+        //    AlertDialog.Builder alert = new AlertDialog.Builder(WelcomeActivity.this);
+        //   alert.setTitle("Oops...");
+        //   alert.setMessage(getResources().getString(R.string.servercall_error));
+        //   alert.setPositiveButton("OK", null);
+        //   alert.show();
+        //}
 
-
-        Button button = (Button) findViewById(R.id.save);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                saveUser();
-            }
-        });
-
-        /*lblDateAndTime = (TextView) rootView.findViewById(R.id.textDtNaiss);
-        ImageButton btnDate = (ImageButton) rootView.findViewById(R.id.buttonSetDate);
-        btnDate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new DatePickerDialog(getActivity(), d, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });*/
-
-        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-
-
-        Logger.getAnonymousLogger().log(Level.INFO, "phone number : ", mTelephonyMgr.getLine1Number());
-        ((EditText) findViewById(R.id.textPhone)).setText(mTelephonyMgr.getLine1Number());
 
 
     }
 
-    public void saveUser() {
-        new AsyncWsCaller<ManageUserIn, ManageUserOut>(this, getUser(), ManageUserOut.class,
-                EmergencyConstants.MANAGE_USER_URL).execute();
-    }
-
-    public void onTaskCompleted(ManageUserOut manageUserOut) {
-        if (manageUserOut == null) {
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Oops...");
-            alertDialog.setMessage(getResources().getString(R.string.servercall_error));
-            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-// here you can add functions
-                }
-            });
-            alertDialog.setIcon(R.drawable.ic_communities);
-            alertDialog.show();
-        } else {
-            userManager.create(UserUtil.mapUserDtoToUser(manageUserOut.getUserDTO(), (short) 1));
-            Logger.getAnonymousLogger().log(Level.INFO, "userAdded : ", userManager.getUser());
-            //TODO rediriger vers HomeActivity
+    private void checkUserRegistered() {
+        if (userManager.getUser() != null)
             startActivity(new Intent(this, HomeActivity.class));
-            finish();
-        }
-
+        else
+            startActivity(new Intent(this, SignupActivity.class));
+        finish();
     }
 
-    private ManageUserIn getUser() {
-        ManageUserIn manageUserIn = new ManageUserIn();
-        manageUserIn.setCodeFonction((short) 1);
-        manageUserIn.setUserDTO(new UserDTO());
 
-        String phoneNr = "+" + String.valueOf((
-                (EditText) findViewById(R.id.textIndicatif)).getText()) + String.valueOf((
-                (EditText) findViewById(R.id.textPhone)).getText());
 
-        manageUserIn.getUserDTO().setTelephone(phoneNr);
-        manageUserIn.getUserDTO().setGcmDeviceId((regId));
-        /*manageUserIn.getUserDTO().setNom(String.valueOf((
-                (TextView) rootView.findViewById(R.id.textNom)).getText()));
-        manageUserIn.getUserDTO().setPrenom(String.valueOf((
-                (TextView) rootView.findViewById(R.id.textprenom)).getText()));
-        manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());*/
-        //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
-        return manageUserIn;
-    }
 
-    public String GetCountryZipCode() {
-        String CountryID = "";
-        String CountryZipCode = "";
 
-        TelephonyManager mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        //getNetworkCountryIso
-        CountryID = mTelephonyMgr.getSimCountryIso().toUpperCase();
-        String[] rl = this.getResources().getStringArray(R.array.CountryCodes);
-        for (int i = 0; i < rl.length; i++) {
-            String[] g = rl[i].split(",");
-            if (g[1].trim().equals(CountryID.trim())) {
-                CountryZipCode = g[0];
-                break;
-            }
-        }
-        return CountryZipCode;
-    }
 
     /**
      * Check the device to make sure it has the Google Play Services APK. If

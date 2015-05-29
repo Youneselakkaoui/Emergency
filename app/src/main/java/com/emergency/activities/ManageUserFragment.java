@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
     private User currentUser;
 
     public ManageUserFragment() {
-        userManager = new UserManagerImpl(getActivity());
+        userManager = new UserManagerImpl();
         currentUser = userManager.getUser();
     }
 
@@ -70,6 +71,10 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_manage_user, container, false);
+        if (savedInstanceState == null || !savedInstanceState.getBoolean("edited",true)) {
+            fillUser(currentUser);
+        }
+
         Spinner spinner = (Spinner) rootView.findViewById(R.id.bloodtype_spinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -92,19 +97,14 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         lblDateAndTime = (TextView) rootView.findViewById(R.id.textDtNaiss);
         ImageButton btnDate = (ImageButton) rootView.findViewById(R.id.buttonSetDate);
         btnDate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick (View v) {
                 new DatePickerDialog(getActivity(), d, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
-        TelephonyManager mTelephonyMgr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
 
-
-        Logger.getAnonymousLogger().log(Level.INFO, "phone number : ", mTelephonyMgr.getLine1Number());
-        ((TextView) rootView.findViewById(R.id.textTelephone)).setText(mTelephonyMgr.getLine1Number());
-        fillUser(currentUser);
         return rootView;
     }
 
@@ -122,14 +122,19 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
             alertDialog.setTitle("Oops...");
             alertDialog.setMessage(getResources().getString(R.string.servercall_error));
-            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
+            alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                // here you can add functions
+                    // here you can add functions
                 }
             });
             alertDialog.setIcon(R.drawable.ic_communities);
             alertDialog.show();
         }
+
+    }
+
+    @Override
+    public void onPreExecute() {
 
     }
 
@@ -147,6 +152,11 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
         manageUserIn.getUserDTO().setGroupSanguin((short) ((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).getSelectedItemId());
         manageUserIn.getUserDTO().setGcmDeviceId(currentUser.getGcmDeviceId());
+        if (((RadioButton) rootView.findViewById(R.id.radiohomme)).isChecked())
+            manageUserIn.getUserDTO().setSexe((short) 1);
+        if (((RadioButton) rootView.findViewById(R.id.radiofemme)).isChecked())
+            manageUserIn.getUserDTO().setSexe((short) 2);
+        manageUserIn.getUserDTO().setAutresInfos(String.valueOf(((EditText) rootView.findViewById(R.id.otherInfo)).getText()));
         //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
         return manageUserIn;
     }
@@ -167,21 +177,25 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
         //switch (user.getGroupSanguin()){
         //   case (short)1 :
         ((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).setSelection(user.getGroupSanguin());
-        //}
 
-        //String bloodType = String.valueOf(((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).getSelectedItemId());
+    }
 
-        //manageUserIn.setCodeFonction((short) 1);
-        //manageUserIn.setUserDTO(new UserDTO());
-        //(TextView) rootView.findViewById(R.id.textTelephone).setT("");
-        //manageUserIn.getUserDTO().setTelephone(String.valueOf((
-        //        (TextView) rootView.findViewById(R.id.textTelephone)).getText()));
-        //manageUserIn.getUserDTO().setNom(String.valueOf((
-        //       (TextView) rootView.findViewById(R.id.textNom)).getText()));
-        //manageUserIn.getUserDTO().setPrenom(String.valueOf((
-        //       (TextView) rootView.findViewById(R.id.textprenom)).getText()));
-        // manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
-        //manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
-        //return manageUserIn;
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("edited",true);
+
+    }
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

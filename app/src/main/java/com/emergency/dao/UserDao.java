@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface UserDao {
 
-    public int insert(User user);
+    public long insert(User user);
 
-    public int update(User user);
+    public long update(User user);
 
-    public int delete();
+    public long delete(User user);
 
     public User selectUser();
 }

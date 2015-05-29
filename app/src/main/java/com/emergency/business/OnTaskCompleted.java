@@ -5,4 +5,6 @@ package com.emergency.business;
  */
 public interface OnTaskCompleted<Return> {
     void onTaskCompleted(Return manageUserOut);
+
+    void onPreExecute();
 }

@@ -13,7 +13,8 @@ import android.widget.TextView;
 import com.emergency.activities.R;
 
 public class SituationActivity extends ActionBarActivity implements View.OnClickListener {
-    private EditText titreText, descText;
+    private TextView titreText;
+    private    EditText     descText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class SituationActivity extends ActionBarActivity implements View.OnClick
         setContentView(R.layout.activity_situation);
 
         Button btnSuivant = (Button) findViewById(R.id.btn_suivant);
-        titreText = (EditText) findViewById(R.id.situation_title);
+        titreText = (TextView) findViewById(R.id.situation_title);
         descText = (EditText) findViewById(R.id.message);
 
         btnSuivant.setOnClickListener(this);

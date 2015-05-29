@@ -17,6 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.emergency.entity.Alerte;
 import com.emergency.entity.Situation;
 import com.emergency.entity.User;
 
@@ -34,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Table Names
 
-    public static final String TABLE_USER = "user";
+
     //private static final String TABLE_USER_SITUATION = "todo_tags";
 
     // Table Create Statements
@@ -54,24 +55,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //         "  `type_envoi` SMALLINT(1) NULL,";
             + ");";
 
-    private static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER + " ( "
-            + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
-            + User.USER_NOM + " CHAR(30), "
-            + User.USER_PRENOM + " CHAR(30), "
-            + User.USER_DATENAISSANCE + " DATE, "
-            + User.USER_SEXE + " SMALLINT(1), "
-            + User.USER_GROUPESANGUIN + " SMALLINT(1), "
-            + User.USER_DIABETE + " SMALLINT(1), "
-            + User.USER_CHOLESTEROL + " SMALLINT(1), "
-            + User.USER_AUTRESINFOS + " TEXT(500), "
-            + User.USER_GCM_DEVICE_ID + " TEXT(200), "
-            + User.USER_ME + " SMALLINT(1) "
-            + ");";
+
 
     @Override
     public void onCreate(SQLiteDatabase dbo) {
         dbo.execSQL(CREATE_TABLE_SITUATION);
-        dbo.execSQL(CREATE_TABLE_USER);
+        dbo.execSQL(User.CREATE_TABLE_USER);
+        dbo.execSQL(Alerte.CREATE_TABLE_ALERTE);
+
+        //TODO bouchon
+        //dbo.execSQL("INSERT INTO " + User.TABLE_USER + " ("
+        //        + User.USER_ME + ","
+        //        + User.USER_GCM_DEVICE_ID + ","
+        //        + User.USER_DIGITS_ID + ","
+        //        + User.USER_TELEPHONE
+
+         //       + ") VALUES(1, 'APA91bECB5CNwmKKRkKRMk_i4TNBrJSrTKnVZY7Vkb1EOT6MygG5tbeXns_fOsSdJ9vziaMgKYGX_AWn3FWsXXTWmjYYcwH-3NYW8uvgPl6wBUAdZZdkoww-GKmnwUTV7yIuxF3rpxH7CiJ0TVqMrLwB2iLzpJrQ6Q',   " +
+         //       "'3293522620', '+212665642637');");
+        //TODO bouchon fin
+
         dbo.execSQL("INSERT INTO " + Situation.TABLE_SITUATION + " ("
                 + Situation.SITUATION_ID_EMETTEUR + ","
                 + Situation.SITUATION_TITRE + ","

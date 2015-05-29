@@ -76,10 +76,10 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
 
         //Tester est ce qu'il s'agit de premier lancement de l'app
 
-        if (prefs.getBoolean("firstRun", true)) {
-            Intent goToNextActivity = new Intent(getActivity().getApplicationContext(), SituationActivity.class);
-            startActivity(goToNextActivity);
-        } else {
+  //      if (prefs.getBoolean("firstRun", true)) {
+     //       Intent goToNextActivity = new Intent(getActivity().getApplicationContext(), SituationActivity.class);
+     //       startActivity(goToNextActivity);
+   //     } else {
 
             mGridView = (StaggeredGridView) rootView.findViewById(R.id.grid_view);
 
@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
             mGridView.setAdapter(mAdapter);
             mGridView.setOnScrollListener(this);
             mGridView.setOnItemClickListener(this);
-        }
+     //   }
         return rootView;
     }
 
@@ -206,6 +206,11 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
 
     @Override
     public void onTaskCompleted(ManageAlerteOut manageUserOut) {
+
+    }
+
+    @Override
+    public void onPreExecute() {
 
     }
 }
