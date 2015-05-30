@@ -307,4 +307,6 @@
     <string name="title_activity_signup">SignupActivity</string>
     <string name="titre_confirmation_close">Quitter</string>
     <string name="texte_confirmation_close">Voulez-vous vraiment quitter l\'application ?</string>
+    <string name="confirmation_yes">Oui</string>
+    <string name="confirmation_no">Non</string>
 </resources>

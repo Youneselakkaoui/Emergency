@@ -3,6 +3,7 @@ package com.emergency.entity;
 import com.orm.SugarRecord;
 import com.orm.dsl.Ignore;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,240 +14,246 @@ import java.util.List;
 
 public class User extends SugarRecord<User> {
 
-    // table name
-    public static final String TABLE_USER = "user";
-    //columns
-    public static final String USER_TELEPHONE = "telephone";
-    public static final String USER_AUTRESINFOS = "autres_infos";
-    public static final String USER_CHOLESTEROL = "cholesterol";
-    public static final String USER_DATENAISSANCE = "date_naissance";
-    public static final String USER_DIABETE = "diabete";
-    public static final String USER_GROUPESANGUIN = "groupe_sanguin";
-    public static final String USER_NOM = "nom";
-    public static final String USER_PRENOM = "prenom";
-    public static final String USER_SEXE = "sexe";
-    public static final String USER_GCM_DEVICE_ID = "gcm_device_id";
-    public static final String USER_ME = "me";
-    public static final String USER_DIGITS_ID = "digits_id";
-    public static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER + " ( "
-            + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
-            + User.USER_NOM + " CHAR(30), "
-            + User.USER_PRENOM + " CHAR(30), "
-            + User.USER_DATENAISSANCE + " DATE, "
-            + User.USER_SEXE + " SMALLINT(1), "
-            + User.USER_GROUPESANGUIN + " SMALLINT(1), "
-            + User.USER_DIABETE + " SMALLINT(1), "
-            + User.USER_CHOLESTEROL + " SMALLINT(1), "
-            + User.USER_AUTRESINFOS + " TEXT(500), "
-            + User.USER_GCM_DEVICE_ID + " TEXT(200), "
-            + User.USER_ME + " SMALLINT(1), "
-            + User.USER_DIGITS_ID + " BIGINT(20) "
-            + ");";
+	// table name
+//    public static final String TABLE_USER = "user";
+//    //columns
+//    public static final String USER_TELEPHONE = "telephone";
+//    public static final String USER_AUTRESINFOS = "autres_infos";
+//    public static final String USER_CHOLESTEROL = "cholesterol";
+//    public static final String USER_DATENAISSANCE = "date_naissance";
+//    public static final String USER_DIABETE = "diabete";
+//    public static final String USER_GROUPESANGUIN = "groupe_sanguin";
+//    public static final String USER_NOM = "nom";
+//    public static final String USER_PRENOM = "prenom";
+//    public static final String USER_SEXE = "sexe";
+//    public static final String USER_GCM_DEVICE_ID = "gcm_device_id";
+//    public static final String USER_ME = "me";
+//    public static final String USER_DIGITS_ID = "digits_id";
+//    public static final String CREATE_TABLE_USER = "CREATE TABLE " + User.TABLE_USER + " ( "
+//            + User.USER_TELEPHONE + " CHAR(20) PRIMARY KEY, "
+//            + User.USER_NOM + " CHAR(30), "
+//            + User.USER_PRENOM + " CHAR(30), "
+//            + User.USER_DATENAISSANCE + " DATE, "
+//            + User.USER_SEXE + " SMALLINT(1), "
+//            + User.USER_GROUPESANGUIN + " SMALLINT(1), "
+//            + User.USER_DIABETE + " SMALLINT(1), "
+//            + User.USER_CHOLESTEROL + " SMALLINT(1), "
+//            + User.USER_AUTRESINFOS + " TEXT(500), "
+//            + User.USER_GCM_DEVICE_ID + " TEXT(200), "
+//            + User.USER_ME + " SMALLINT(1), "
+//            + User.USER_DIGITS_ID + " BIGINT(20) "
+//            + ");";
 
-    private String telephone;
-    private String autresInfos;
-    private short cholesterol;
-    private Date dateNaissance;
-    private short diabete;
-    private short groupSanguin;
-    private String nom;
-    private String prenom;
-    private short sexe;
-    private String gcmDeviceId;
-    private short me;
-    @Ignore
-    private List<RecepteursSituation> recepteursSituations;
-    @Ignore
-    private List<Situation> situations;
-    @Ignore
-    private List<SuiviAlerte> suiviAlertes;
-    private long digitsId;
+	private String telephone;
+	private String autresInfos;
+	private short cholesterol;
+	private Date dateNaissance;
+	private short diabete;
+	private short groupSanguin;
+	private String nom;
+	private String prenom;
+	private short sexe;
+	private String gcmDeviceId;
 
-    public long getDigitsId() {
-        return digitsId;
-    }
 
-    public void setDigitsId(long digitsId) {
-        this.digitsId = digitsId;
-    }
+	@Ignore
+	private List<RecepteursSituation> recepteursSituations;
+	@Ignore
+	private List<Situation> situations;
+	@Ignore
+	private List<SuiviAlerte> suiviAlertes;
+	private long digitsId;
 
-    public User() {
-    }
+	public long getDigitsId () {
+		return digitsId;
+	}
 
-    public User(String telephone,
-                String autresInfos,
-                short  cholesterol,
-                Date   dateNaissance,
-                short  diabete,
-                short  groupSanguin,
-                String nom,
-                String prenom,
-                short  sexe,
-                String gcmDeviceId,
-                short me,
-                long digitsId) {
-        this.telephone = telephone;
-        this.autresInfos = autresInfos;
-        this.cholesterol = cholesterol;
-        this.dateNaissance = dateNaissance;
-        this.diabete = diabete;
-        this.groupSanguin = groupSanguin;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.sexe = sexe;
-        this.gcmDeviceId = gcmDeviceId;
-        this.me = me;
-        this.digitsId=digitsId;
-    }
-    public String getGcmDeviceId() {
-        return this.gcmDeviceId;
-    }
-    public void setGcmDeviceId(String gcmDeviceId) {
-        this.gcmDeviceId = gcmDeviceId;
-    }
+	public void setDigitsId (long digitsId) {
+		this.digitsId = digitsId;
+	}
 
-    public short getMe() {
-        return this.me;
-    }
-    public void setMe(short me) {
-        this.me = me;
-    }
-    public String getTelephone() {
-        return this.telephone;
-    }
+	public User () {
+		Calendar cal = Calendar.getInstance();cal.set(2001,1,1);
+		this.dateNaissance = cal.getTime();
+	}
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+//	public User (String telephone,
+//	             String autresInfos,
+//	             short cholesterol,
+//	             Date dateNaissance,
+//	             short diabete,
+//	             short groupSanguin,
+//	             String nom,
+//	             String prenom,
+//	             short sexe,
+//	             String gcmDeviceId,
+//	             //short me,
+//	              long digitsId) {
+//		this.telephone = telephone;
+//		this.autresInfos = autresInfos;
+//		this.cholesterol = cholesterol;
+//		this.dateNaissance = dateNaissance;
+//		this.diabete = diabete;
+//		this.groupSanguin = groupSanguin;
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.sexe = sexe;
+//		this.gcmDeviceId = gcmDeviceId;
+//		// this.me = me;
+//		this.digitsId = digitsId;
+//	}
 
-    public String getAutresInfos() {
-        return this.autresInfos;
-    }
+	public String getGcmDeviceId () {
+		return this.gcmDeviceId;
+	}
 
-    public void setAutresInfos(String autresInfos) {
-        this.autresInfos = autresInfos;
-    }
+	public void setGcmDeviceId (String gcmDeviceId) {
+		this.gcmDeviceId = gcmDeviceId;
+	}
 
-    public short getCholesterol() {
-        return this.cholesterol;
-    }
+	// public short getMe() {
+	//   return this.me;
+	// }
+	//public void setMe(short me) {
+	//    this.me = me;
+	//}
+	public String getTelephone () {
+		return this.telephone;
+	}
 
-    public void setCholesterol(short cholesterol) {
-        this.cholesterol = cholesterol;
-    }
+	public void setTelephone (String telephone) {
+		this.telephone = telephone;
+	}
 
-    public Date getDateNaissance() {
-        return this.dateNaissance;
-    }
+	public String getAutresInfos () {
+		return this.autresInfos;
+	}
 
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
+	public void setAutresInfos (String autresInfos) {
+		this.autresInfos = autresInfos;
+	}
 
-    public short getDiabete() {
-        return this.diabete;
-    }
+	public short getCholesterol () {
+		return this.cholesterol;
+	}
 
-    public void setDiabete(short diabete) {
-        this.diabete = diabete;
-    }
+	public void setCholesterol (short cholesterol) {
+		this.cholesterol = cholesterol;
+	}
 
-    public short getGroupSanguin() {
-        return this.groupSanguin;
-    }
+	public Date getDateNaissance () {
 
-    public void setGroupSanguin(short groupSanguin) {
-        this.groupSanguin = groupSanguin;
-    }
+		return this.dateNaissance;
+	}
 
-    public String getNom() {
-        return this.nom;
-    }
+	public void setDateNaissance (Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public short getDiabete () {
+		return this.diabete;
+	}
 
-    public String getPrenom() {
-        return this.prenom;
-    }
+	public void setDiabete (short diabete) {
+		this.diabete = diabete;
+	}
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+	public short getGroupSanguin () {
+		return this.groupSanguin;
+	}
 
-    public short getSexe() {
-        return this.sexe;
-    }
+	public void setGroupSanguin (short groupSanguin) {
+		this.groupSanguin = groupSanguin;
+	}
 
-    public void setSexe(short sexe) {
-        this.sexe = sexe;
-    }
+	public String getNom () {
+		return this.nom;
+	}
 
-    public List<RecepteursSituation> getRecepteursSituations() {
-        return this.recepteursSituations;
-    }
+	public void setNom (String nom) {
+		this.nom = nom;
+	}
 
-    public void setRecepteursSituations(List<RecepteursSituation> recepteursSituations) {
-        this.recepteursSituations = recepteursSituations;
-    }
+	public String getPrenom () {
+		return this.prenom;
+	}
 
-    public RecepteursSituation addRecepteursSituation(RecepteursSituation recepteursSituation) {
-        getRecepteursSituations().add(recepteursSituation);
-        recepteursSituation.setUser(this);
+	public void setPrenom (String prenom) {
+		this.prenom = prenom;
+	}
 
-        return recepteursSituation;
-    }
+	public short getSexe () {
+		return this.sexe;
+	}
 
-    public RecepteursSituation removeRecepteursSituation(RecepteursSituation recepteursSituation) {
-        getRecepteursSituations().remove(recepteursSituation);
-        recepteursSituation.setUser(null);
+	public void setSexe (short sexe) {
+		this.sexe = sexe;
+	}
 
-        return recepteursSituation;
-    }
+	public List<RecepteursSituation> getRecepteursSituations () {
+		return this.recepteursSituations;
+	}
 
-    public List<Situation> getSituations() {
-        return this.situations;
-    }
+	public void setRecepteursSituations (List<RecepteursSituation> recepteursSituations) {
+		this.recepteursSituations = recepteursSituations;
+	}
 
-    public void setSituations(List<Situation> situations) {
-        this.situations = situations;
-    }
+	public RecepteursSituation addRecepteursSituation (RecepteursSituation recepteursSituation) {
+		getRecepteursSituations().add(recepteursSituation);
+		recepteursSituation.setUser(this);
 
-    public Situation addSituation(Situation situation) {
-        getSituations().add(situation);
-        situation.setUser(this);
+		return recepteursSituation;
+	}
 
-        return situation;
-    }
+	public RecepteursSituation removeRecepteursSituation (RecepteursSituation recepteursSituation) {
+		getRecepteursSituations().remove(recepteursSituation);
+		recepteursSituation.setUser(null);
 
-    public Situation removeSituation(Situation situation) {
-        getSituations().remove(situation);
-        situation.setUser(null);
+		return recepteursSituation;
+	}
 
-        return situation;
-    }
+	public List<Situation> getSituations () {
+		return this.situations;
+	}
 
-    public List<SuiviAlerte> getSuiviAlertes() {
-        return this.suiviAlertes;
-    }
+	public void setSituations (List<Situation> situations) {
+		this.situations = situations;
+	}
 
-    public void setSuiviAlertes(List<SuiviAlerte> suiviAlertes) {
-        this.suiviAlertes = suiviAlertes;
-    }
+	public Situation addSituation (Situation situation) {
+		getSituations().add(situation);
+		situation.setUser(this);
 
-    public SuiviAlerte addSuiviAlerte(SuiviAlerte suiviAlerte) {
-        getSuiviAlertes().add(suiviAlerte);
-        suiviAlerte.setUser(this);
+		return situation;
+	}
 
-        return suiviAlerte;
-    }
+	public Situation removeSituation (Situation situation) {
+		getSituations().remove(situation);
+		situation.setUser(null);
 
-    public SuiviAlerte removeSuiviAlerte(SuiviAlerte suiviAlerte) {
-        getSuiviAlertes().remove(suiviAlerte);
-        suiviAlerte.setUser(null);
+		return situation;
+	}
 
-        return suiviAlerte;
-    }
+	public List<SuiviAlerte> getSuiviAlertes () {
+		return this.suiviAlertes;
+	}
+
+	public void setSuiviAlertes (List<SuiviAlerte> suiviAlertes) {
+		this.suiviAlertes = suiviAlertes;
+	}
+
+	public SuiviAlerte addSuiviAlerte (SuiviAlerte suiviAlerte) {
+		getSuiviAlertes().add(suiviAlerte);
+		suiviAlerte.setUser(this);
+
+		return suiviAlerte;
+	}
+
+	public SuiviAlerte removeSuiviAlerte (SuiviAlerte suiviAlerte) {
+		getSuiviAlertes().remove(suiviAlerte);
+		suiviAlerte.setUser(null);
+
+		return suiviAlerte;
+	}
 
 }

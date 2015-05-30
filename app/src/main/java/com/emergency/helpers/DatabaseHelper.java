@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase dbo) {
         dbo.execSQL(CREATE_TABLE_SITUATION);
-        dbo.execSQL(User.CREATE_TABLE_USER);
+      //  dbo.execSQL(User.CREATE_TABLE_USER);
         dbo.execSQL(Alerte.CREATE_TABLE_ALERTE);
 
         //TODO bouchon
@@ -171,7 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + Situation.TABLE_SITUATION);
-        db.execSQL("DROP TABLE IF EXISTS " + User.TABLE_USER);
+        //db.execSQL("DROP TABLE IF EXISTS " + User.TABLE_USER);
 
         // create new tables
         onCreate(db);

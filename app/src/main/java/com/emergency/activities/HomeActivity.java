@@ -67,7 +67,7 @@ public class HomeActivity extends ActionBarActivity
 			manageUserFragment.setArguments(getIntent().getExtras());
 		}
 		else {
-			manageUserFragment = (Fragment) getFragmentManager().findFragmentByTag("manageUserFragment");
+			manageUserFragment =  getFragmentManager().findFragmentByTag("manageUserFragment");
 		}
 
 
@@ -201,17 +201,17 @@ public class HomeActivity extends ActionBarActivity
 	@Override
 	public void onBackPressed () {
 		new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_alert)
-				.setTitle("Closing Activity")
-				.setMessage("Are you sure you want to close this activity?")
-				.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				.setIcon(android.R.drawable.alert_dark_frame)
+				.setTitle(getString(R.string.titre_confirmation_close))
+				.setMessage(getString(R.string.texte_confirmation_close))
+				.setPositiveButton(getString(R.string.confirmation_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick (DialogInterface dialog, int which) {
 						finish();
 					}
 
 				})
-				.setNegativeButton("No", null)
+				.setNegativeButton(getString(R.string.confirmation_no), null)
 				.show();
 	}
 
