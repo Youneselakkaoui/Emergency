@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
@@ -131,7 +132,7 @@ public class MainActivity extends ActionBarActivity
 				//      fragment.setArguments(args);
 				break;
 			case 3:
-				fragment = new GoogleMapActivity();
+				fragment = new InfoAlerte();
 				break;
 			case 4:
 				//fragment = new ManageSituation();
@@ -168,6 +169,17 @@ public class MainActivity extends ActionBarActivity
 		actionBar.setTitle(mTitle);
 	}
 
+	public void clickSuivant(View view){
+
+		android.app.Fragment fragment = null;
+
+		fragment=new GoogleMapActivity();
+		android.app.FragmentManager fragmentManager = getFragmentManager();
+		fragmentManager.beginTransaction()
+				.replace(R.id.container, fragment).commit();
+
+
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu (Menu menu) {
