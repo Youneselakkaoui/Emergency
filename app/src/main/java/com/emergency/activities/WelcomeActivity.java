@@ -32,6 +32,7 @@ import com.emergency.business.impl.UserManagerImpl;
 import com.emergency.dto.ManageUserIn;
 import com.emergency.dto.ManageUserOut;
 import com.emergency.dto.UserDTO;
+import com.emergency.entity.User;
 import com.emergency.util.EmergencyConstants;
 import com.emergency.util.UserUtil;
 import com.google.android.gms.common.ConnectionResult;
@@ -41,6 +42,7 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,70 +53,47 @@ import io.fabric.sdk.android.Fabric;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  */
-public class WelcomeActivity extends Activity  {
+public class WelcomeActivity extends Activity {
 
-    private UserManager userManager;
+	private UserManager userManager;
 
-    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    static final String TAG = "Emergency";
-    GoogleCloudMessaging gcm;
-    public static final String EXTRA_MESSAGE = "message";
-    public static final String PROPERTY_REG_ID = "registration_id";
-    private static final String PROPERTY_APP_VERSION = "appVersion";
-    String SENDER_ID = "1028860605775";
-    private String regId;
-    Context context;
+	Context context;
 
-    public WelcomeActivity() {
-        userManager = new UserManagerImpl();
-        //
+	public WelcomeActivity () {
+		userManager = new UserManagerImpl();
+		//
 
-    }
+	}
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	protected void onCreate (Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		context = getApplicationContext();
 
 
+		//TODO Bouchon User
+		if (userManager.getUser() == null) {
+			User user = new User();
+			user.setTelephone("+000000000");
+			user.setDateNaissance(new Date());
+			user.save();
+		}
+		//TODO Fin bouchon user
+		checkUserRegistered();
 
+	}
 
-        context = getApplicationContext();
-
-
-
-
-
-        checkUserRegistered();
-
-        //digitsButton
-        //        .setAuthTheme(android.R.style.Theme_Material);
-        //digitsButton.performClick();
-
-        //if (savedInstanceState != null && "ERROR".equals(savedInstanceState.getString("ERROR"))) {
-        //    AlertDialog.Builder alert = new AlertDialog.Builder(WelcomeActivity.this);
-        //   alert.setTitle("Oops...");
-        //   alert.setMessage(getResources().getString(R.string.servercall_error));
-        //   alert.setPositiveButton("OK", null);
-        //   alert.show();
-        //}
-
-
-
-    }
-
-    private void checkUserRegistered() {
-        if (userManager.getUser() != null)
-            startActivity(new Intent(this, HomeActivity.class));
-        else
-            startActivity(new Intent(this, SignupActivity.class));
-        finish();
-    }
-
-
-
-
-
+	private void checkUserRegistered () {
+		if (userManager.getUser() != null) {
+			startActivity(new Intent(this, HomeActivity.class));
+		}
+		else {
+			startActivity(new Intent(this, SignupActivity.class));
+		}
+		finish();
+	}
 
 
 }
