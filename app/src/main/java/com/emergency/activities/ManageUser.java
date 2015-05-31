@@ -82,8 +82,8 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_manage_user, menu);
-        return true;
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -94,9 +94,9 @@ public class ManageUser extends ActionBarActivity implements OnTaskCompleted<Man
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -1,6 +1,7 @@
 package com.emergency.activities;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.loopj.android.http.AsyncHttpClient;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -9,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -62,7 +62,21 @@ public class GcmIntentService extends IntentService {
                 //}
                 //Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
-                sendNotification("Received: " + extras.toString());
+                //TODO test
+//                AlerteRecue alerteRecue = new AlerteRecue();
+//                alerteRecue.setDateEnvoi(new Date());
+//                alerteRecue.setSituation(new SituationRecue());
+//                alerteRecue.getSituation().setUser(new UserRecu());
+//                alerteRecue.getSituation().setIdSituation(1);
+//                alerteRecue.getSituation().setTitre("titre situation");
+//                alerteRecue.getSituation().getUser().setTelephone("0000");
+//                alerteRecue.getSituation().getUser().setDateNaissance(new Date());
+//                AlerteRecueDao dao = new AlerteRecueDaoImpl();
+//                dao.insert(alerteRecue);
+//                System.out.print(dao.selectAll());
+                //TODO fin test
+	            processNotification(intent);
+
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -70,7 +84,20 @@ public class GcmIntentService extends IntentService {
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
-    // Put the message into a notification and post it.
+	private void processNotification (Intent s) {
+
+
+			String notificationType = s.getStringExtra("notificatioType");
+			String requestObjectId = s.getStringExtra("requestObjectId");
+            final AsyncHttpClient client = new AsyncHttpClient();
+
+           // client.post()
+			sendNotification("Received: " + s);
+
+
+	}
+
+	// Put the message into a notification and post it.
     // This is just one simple example of what you might choose to do with
     // a GCM message.
     private void sendNotification(String msg) {
@@ -78,7 +105,7 @@ public class GcmIntentService extends IntentService {
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, HomeActivity.class), 0);
+                new Intent(this, MainActivity.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)

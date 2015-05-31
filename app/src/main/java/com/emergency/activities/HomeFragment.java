@@ -76,10 +76,6 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
 
         //Tester est ce qu'il s'agit de premier lancement de l'app
 
-  //      if (prefs.getBoolean("firstRun", true)) {
-     //       Intent goToNextActivity = new Intent(getActivity().getApplicationContext(), SituationActivity.class);
-     //       startActivity(goToNextActivity);
-   //     } else {
 
             mGridView = (StaggeredGridView) rootView.findViewById(R.id.grid_view);
 
@@ -101,7 +97,7 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         //view.setBackgroundColor(Color.parseColor("#ffaf3f"));
-        Intent intent = new Intent(getActivity().getApplicationContext(), SituationCompteRenduActivity.class);
+       // Intent intent = new Intent(getActivity().getApplicationContext(), SituationCompteRenduActivity.class);
         // create class object
         gps = new GPSTracker(getActivity());
         Situation s = situationManager.getAll().get(position);
@@ -136,8 +132,8 @@ public class HomeFragment extends Fragment implements AbsListView.OnScrollListen
             Toast.makeText(getActivity().getApplicationContext(),
                     "Your Location is - \nLat: " + latitude + "\nLong: " + longitude,
                     Toast.LENGTH_LONG).show();
-            intent.putExtra("Situation", s);
-            startActivity(intent);
+        //    intent.putExtra("Situation", s);
+        //    startActivity(intent);
         } else {
             // can't get location
             // GPS or Network is not enabled

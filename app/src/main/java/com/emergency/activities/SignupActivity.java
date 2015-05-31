@@ -1,27 +1,19 @@
 package com.emergency.activities;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Fragment;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.app.AlertDialog;
-import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,41 +23,28 @@ import com.digits.sdk.android.Digits;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
-import com.emergency.business.AsyncWsCaller;
-import com.emergency.business.OnTaskCompleted;
 import com.emergency.business.UserManager;
 import com.emergency.business.impl.UserManagerImpl;
 import com.emergency.dto.ManageUserIn;
 import com.emergency.dto.ManageUserOut;
 import com.emergency.dto.UserDTO;
 import com.emergency.util.EmergencyConstants;
-import com.emergency.util.JsonUtils;
 import com.emergency.util.UserUtil;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.HttpEntityWrapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -273,7 +252,7 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 
 
 	private void redirectToHomeActivity () {
-		startActivity(new Intent(this, HomeActivity.class));
+		startActivity(new Intent(this, MainActivity.class));
 		finish();
 	}
 
@@ -434,7 +413,7 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 	private SharedPreferences getGcmPreferences(Context context) {
 		// This sample app persists the registration ID in shared preferences, but
 		// how you store the regID in your app is up to you.
-		return getSharedPreferences(HomeActivity.class.getSimpleName(),
+		return getSharedPreferences(MainActivity.class.getSimpleName(),
 				Context.MODE_PRIVATE);
 	}
 

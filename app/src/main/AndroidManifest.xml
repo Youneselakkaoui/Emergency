@@ -40,20 +40,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.MyCompatTheme">
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"></activity>
-        <!--
-        <activity
-            android:name=".SituationActivity"
-            android:label="@string/title_activity_situation" >
-
-        </activity>
-
-        <activity
-            android:name=".EtatAlerteActivity"
-            android:label="@string/title_activity_etat_alerte" >
-        </activity>
-        -->
 
         <activity
             android:name=".WelcomeActivity"
