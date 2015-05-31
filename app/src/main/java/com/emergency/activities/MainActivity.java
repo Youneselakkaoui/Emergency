@@ -6,6 +6,8 @@ import android.app.Fragment;
 import android.content.Context;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -171,13 +173,14 @@ public class MainActivity extends ActionBarActivity
 
 	public void clickSuivant(View view){
 
-		android.app.Fragment fragment = null;
-
-		fragment=new GoogleMapActivity();
-		android.app.FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.container, fragment).commit();
-
+//		android.app.Fragment fragment = null;
+//
+//		fragment=new GoogleMapActivity();
+//		android.app.FragmentManager fragmentManager = getFragmentManager();
+//		fragmentManager.beginTransaction()
+//				.replace(R.id.container, fragment).commit();
+		Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + "33.5930556,-7.6163889"));
+		startActivity(i);
 
 	}
 
