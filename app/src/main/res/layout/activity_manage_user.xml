@@ -1,191 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_height="fill_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_nom"
-                android:id="@+id/labelnom"
-                android:layout_column="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/manage_user_nom"
-                android:ems="7"
-                android:id="@+id/textNom" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_prenom"
-                android:id="@+id/labelprenom"
-                android:layout_column="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/manage_user_prenom"
-                android:ems="10"
-                android:id="@+id/textprenom" />
-        </TableRow>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:paddingLeft="20dp"
+                  android:paddingRight="20dp">
 
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_birthday"
-                android:id="@+id/labeldtnaiss"
-                android:layout_column="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/textDtNaiss"
-                android:editable="false"
-                android:enabled="false" />
-
-            <ImageButton
-                android:id="@+id/buttonSetDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/manage_user_selectdate"
-                android:cropToPadding="true"
-                android:onClick="selectDate"
-                android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_phone"
-                android:id="@+id/labeltel"
-                android:layout_column="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:ems="10"
-                android:id="@+id/textTelephone" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Sexe :"
-                android:id="@+id/txthomme"
-                android:layout_column="1" />
-
-            <RadioGroup>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Homme"
-                    android:id="@+id/radiohomme" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Femme"
-                    android:id="@+id/radiofemme" />
-            </RadioGroup>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_bloodtype"
-                android:id="@+id/labelbloodtype"
-                android:layout_column="1" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bloodtype_spinner"
-                style="@android:style/Widget.DeviceDefault.DropDownItem.Spinner" />
-
-
-        </TableRow>
-
-        <TableRow
+        <TableLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/labelnom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="@string/manage_user_nom"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <EditText
+                    android:id="@+id/textNom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:hint="@string/manage_user_nom"
+                    android:inputType="textPersonName"/>
+
+            </TableRow>
+
+            <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/save"
-                android:layout_column="2"
-                android:text="@string/manage_user_saveButton"
-                android:clickable="true"
-                android:onClick="saveUser" />
-        </TableRow>
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/labelprenom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="@string/manage_user_prenom"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <EditText
+                    android:id="@+id/textprenom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/manage_user_prenom"
+                    android:inputType="textPersonName"/>
+            </TableRow>
 
 
-    </TableLayout>
-</LinearLayout>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/labeldtnaiss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="@string/manage_user_birthday"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <EditText
+                    android:id="@+id/textDtNaiss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="date"/>
+
+                <ImageButton
+                    android:id="@+id/buttonSetDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/manage_user_selectdate"
+                    android:cropToPadding="true"
+                    android:onClick="selectDate"
+                    android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/labeltel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="@string/manage_user_phone"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <EditText
+                    android:id="@+id/textTelephone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="phone"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/txthomme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="@string/user_sexe"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <RadioGroup>
+
+                    <RadioButton
+                        android:id="@+id/radiohomme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Homme"/>
+
+                    <RadioButton
+                        android:id="@+id/radiofemme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Femme"/>
+                </RadioGroup>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/labelbloodtype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:text="@string/manage_user_bloodtype"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <Spinner
+                    android:id="@+id/bloodtype_spinner"
+                    style="@android:style/Widget.DeviceDefault.DropDownItem.Spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:clickable="true"
+                    android:onClick="saveUser"
+                    android:text="@string/manage_user_saveButton"/>
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+</ScrollView>

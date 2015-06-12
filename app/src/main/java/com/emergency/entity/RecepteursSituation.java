@@ -1,60 +1,31 @@
 package com.emergency.entity;
 
-import java.io.Serializable;
-import java.util.Date;
+import com.orm.SugarRecord;
+
 
 
 /**
  * The persistent class for the recepteurs_situation database table.
  */
 
-public class RecepteursSituation implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private Date dateCreation;
-
-    private Date dateModification;
+public class RecepteursSituation extends SugarRecord<RecepteursSituation> {
+	private Situation situation;
+	private String numUser;
 
 
-    private Situation situation;
+	public Situation getSituation () {
+		return situation;
+	}
 
-    private User user;
+	public void setSituation (Situation situation) {
+		this.situation = situation;
+	}
 
-    public RecepteursSituation() {
-    }
+	public String getNumUser () {
+		return numUser;
+	}
 
-    public Date getDateCreation() {
-        return this.dateCreation;
-    }
-
-    public Date getDateModification() {
-        return this.dateModification;
-    }
-
-
-    public Situation getSituation() {
-        return this.situation;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setDateCreation(final Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public void setDateModification(final Date dateModification) {
-        this.dateModification = dateModification;
-    }
-
-
-    public void setSituation(final Situation situation) {
-        this.situation = situation;
-    }
-
-    public void setUser(final User user) {
-        this.user = user;
-    }
-
+	public void setNumUser (String numUser) {
+		this.numUser = numUser;
+	}
 }

@@ -15,7 +15,9 @@ public interface AlerteDao {
 
     public int delete(Alerte alerte);
 
-    public Alerte select(int id);
+    public Alerte select(long id);
+
+    public Alerte selectByIdAlerte(int id);
 
     public List<Alerte> selectAll();
 }

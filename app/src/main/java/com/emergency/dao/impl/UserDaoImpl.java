@@ -5,6 +5,7 @@ import com.emergency.dao.UserDao;
 import com.emergency.entity.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,6 +18,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public long insert (User user) {
 		user.setId(null);
+		user.setLastChanged(new Date());
+		user.setSyncTime(new Date(user.getLastChanged().getTime() - 1000L));
 		user.save();
 		return user.getId();
 	}
@@ -24,6 +27,10 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public long update (User user) {
 		user.setId(1L);
+		user.setLastChanged(new Date());
+		if (user.getSyncTime() == null) {
+			user.setSyncTime(selectUser().getSyncTime());
+		}
 		user.save();
 		return user.getId();
 	}

@@ -46,4 +46,49 @@ public class UserUtil {
 
 		return user;
 	}
+
+	public static ManageUserIn mapUserToManageUserIn (User user) {
+		ManageUserIn manageUserIn = new ManageUserIn();
+		UserDTO userDTO = new UserDTO();
+		manageUserIn.setUserDTO(userDTO);
+
+		manageUserIn.setCodeFonction((short) 1);
+		userDTO.setDateNaissance(user.getDateNaissance());
+		userDTO.setTelephone(user.getTelephone());
+		userDTO.setPrenom(user.getPrenom());
+		userDTO.setNom(user.getNom());
+		userDTO.setAutresInfos(user.getAutresInfos());
+		userDTO.setCholesterol(user.getCholesterol());
+		userDTO.setDiabete(user.getDiabete());
+		userDTO.setGroupSanguin(user.getGroupSanguin());
+		userDTO.setSexe(user.getSexe());
+		userDTO.setGcmDeviceId(user.getGcmDeviceId());
+		userDTO.setDigitsId(user.getDigitsId());
+
+		return manageUserIn;
+
+	}
+
+	public static UserDTO mapUserToUserDTO (User userDTO) {
+
+		if (userDTO != null) {
+			UserDTO user = new UserDTO();
+			user.setDateNaissance(userDTO.getDateNaissance());
+			user.setTelephone(userDTO.getTelephone());
+			user.setPrenom(userDTO.getPrenom());
+			user.setNom(userDTO.getNom());
+			user.setAutresInfos(userDTO.getAutresInfos());
+			user.setCholesterol(userDTO.getCholesterol());
+			user.setDiabete(userDTO.getDiabete());
+			user.setGroupSanguin(userDTO.getGroupSanguin());
+			user.setSexe(userDTO.getSexe());
+			user.setGcmDeviceId(userDTO.getGcmDeviceId());
+			user.setDigitsId(userDTO.getDigitsId());
+			return user;
+		}
+
+
+
+		return null;
+	}
 }

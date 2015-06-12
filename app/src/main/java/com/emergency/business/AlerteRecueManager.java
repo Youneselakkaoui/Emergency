@@ -19,4 +19,10 @@ public interface AlerteRecueManager {
 	public boolean edit(AlerteRecue s);
 
 	public void remove(long id);
+
+	int sync (AlerteRecue syncAlerteOut);
+
+	long nbrNonLues();
+
+	void majLue(long id);
 }

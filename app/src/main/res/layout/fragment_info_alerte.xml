@@ -1,121 +1,250 @@
-<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
+    android:padding="10dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
     android:weightSum="1">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/table_del_alerte"
+        >
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:gravity="right">
+
+        <ImageButton
+            android:id="@+id/btn_del_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete_icon"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="right"/>
+    </TableRow>
+    </TableLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#F8F8FF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Situation"/>
+    </LinearLayout>
 
     <TableLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Titre "/>
+            <TextView
+                android:id="@+id/txtTitre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message "/>
+            <TextView
+                android:id="@+id/txtMessage"
+                android:singleLine="false"
+                android:gravity="top"
+                android:lines="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+        </TableRow>
+    </TableLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#F8F8FF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Informations personelles"
+            />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center|center_horizontal">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
             <TextView
+                android:id="@+id/labelEmeteur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Alerte"
-                android:id="@+id/textView2"
-                android:gravity="center_vertical|center_horizontal" />
-
+                android:text="Emeteur "/>
+            <TextView
+                android:id="@+id/txtNomPrenom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
 
         <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
             <TextView
+                android:id="@+id/labelSexe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView3" />
+                android:text="Sexe "/>
+            <TextView
+                android:id="@+id/txtSexe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/labelTel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Téléphone "/>
+            <TextView
+                android:id="@+id/txtTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
     </TableLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:hint="@string/situation" />
 
-    <EditText
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:id="@+id/message"
-        android:gravity="top"
-        android:layout_weight="0.85"
-        android:hint="@string/msg_aletre" />
+        android:padding="10dp"
+        android:background="#F8F8FF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Informations médicales"
+            />
+    </LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="123dp"
-        android:layout_marginBottom="15dp">
-
+        android:layout_height="wrap_content">
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
             <TextView
+                android:id="@+id/labelgrpsng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_nom"
-                android:id="@+id/labelnom"
-                android:layout_column="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/manage_user_nom"
-                android:ems="7"
-                android:id="@+id/textNom" />
-
+                android:text="Groupe sanguin "/>
+            <TextView
+                android:id="@+id/txtGroupeSanguin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
-
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
+            android:id="@+id/tableRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
             <TextView
+                android:id="@+id/labeldiabete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/manage_user_prenom"
-                android:id="@+id/labelprenom"
-                android:layout_column="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/manage_user_prenom"
-                android:ems="10"
-                android:id="@+id/textprenom" />
-
+                android:text="Diabete "/>
+            <TextView
+                android:id="@+id/txtDiabete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </TableRow>
-
-
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/labelCholesterol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cholesterol "/>
+            <TextView
+                android:id="@+id/txtCholesterol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </TableRow>
     </TableLayout>
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/btn_suivant"
-        android:onClick="clickSuivant"
-        android:id="@+id/btn_suivant" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#F8F8FF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Informations supplementaires"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtautreInfo"
+            android:singleLine="false"
+            android:gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="top"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+
+        <ImageButton
+            android:src="@drawable/map_icon"
+            android:text="@string/alerte_location"
+            android:id="@+id/btn_suivant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>
+</ScrollView>

@@ -1,6 +1,7 @@
 package com.emergency.activities;
 
 import android.app.ProgressDialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 
@@ -108,9 +109,7 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 			if (regId.isEmpty()) {
 				registerInBackground();
 			}
-		} else {
-			Log.i(TAG, "No valid Google Play Services APK found.");
-		}
+
 		if (phoneNr == null || "".equals(phoneNr)) {
 			Digits.getSessionManager().clearActiveSession();
 		}
@@ -150,7 +149,13 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 		if (savedInstanceState != null && savedInstanceState.getBoolean("dialgShown", false)) {
 			prgDialog.show();
 		}
-
+		} else {
+			AlertDialog.Builder alert = new AlertDialog.Builder(SignupActivity.this);
+			alert.setTitle("Oops...");
+			alert.setMessage(getResources().getString(R.string.no_gplay_serv));
+			alert.setPositiveButton("OK", null);
+			alert.show();
+		}
 
 	}
 
@@ -159,6 +164,7 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 		// new AsyncWsCaller<ManageUserIn, ManageUserOut>(this, getUser(phoneNr, regId, digitsId), ManageUserOut.class,
 		//        EmergencyConstants.MANAGE_USER_URL).execute();
 		// Show Progress Dialog
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		prgDialog.show();
 		// Make RESTful webservice call using AsyncHttpClient object
 		final AsyncHttpClient client = new AsyncHttpClient();
@@ -171,7 +177,7 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 						@Override
 						public void onSuccess (int statusCode, Header[] headers, byte[] responseBody) {
 							// Hide Progress Dialog
-							prgDialog.hide();
+
 							try {
 								if (responseBody != null) {
 									Log.i("com.emergency.emergency", responseBody.toString());
@@ -187,7 +193,7 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 								userManager.create(UserUtil.mapUserDtoToUser(out.getUserDTO(), (short) 1));
 								if (out.getAnomalie() == null) {
 									Toast.makeText(getApplicationContext(),
-											"You are successfully logged in!",
+											getString(R.string.logon_sucess),
 											Toast.LENGTH_LONG).show();
 									// Navigate to Home screen
 
@@ -200,6 +206,8 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 											errorMsg.getText(),
 											Toast.LENGTH_LONG).show();
 								}
+								prgDialog.hide();
+								setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								Toast.makeText(
@@ -207,6 +215,8 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 										"Error Occured [Server's JSON response might be invalid]!",
 										Toast.LENGTH_LONG).show();
 								e.printStackTrace();
+								prgDialog.hide();
+								setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 							}
 						}
 
@@ -214,36 +224,40 @@ public class SignupActivity extends Activity /*implements OnTaskCompleted<Manage
 						public void onFailure (int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 							// Hide Progress Dialog
 							prgDialog.hide();
+
 							if (responseBody != null) {
 								Log.i("com.emergency.emergency", responseBody.toString());
 							}
 							// When Http response code is '404'
 							if (statusCode == 404) {
 								Toast.makeText(getApplicationContext(),
-										"Requested resource not found",
+										getString(R.string.errserv),
 										Toast.LENGTH_LONG).show();
 							}
 							// When Http response code is '500'
 							else if (statusCode == 500) {
 								Toast.makeText(getApplicationContext(),
-										"Something went wrong at server end",
+										getString(R.string.errserv),
 										Toast.LENGTH_LONG).show();
 							}
 							// When Http response code other than 404, 500
 							else {
 								Toast.makeText(
 										getApplicationContext(),
-										"Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]",
+										getString(R.string.status500),
 										Toast.LENGTH_LONG).show();
 							}
+							setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 						}
 
 					});
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
+			prgDialog.hide();
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			Toast.makeText(
 					getApplicationContext(),
-					"Error Occured [Server's JSON response might be invalid]!",
+					getString(R.string.errserv),
 					Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}

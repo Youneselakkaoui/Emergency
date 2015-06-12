@@ -1,18 +1,15 @@
 package com.emergency.activities;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -21,52 +18,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.emergency.business.AsyncWsCaller;
-import com.emergency.business.OnTaskCompleted;
 import com.emergency.business.UserManager;
 import com.emergency.business.impl.UserManagerImpl;
-import com.emergency.dto.ManageUserIn;
-import com.emergency.dto.ManageUserOut;
-import com.emergency.dto.UserDTO;
 import com.emergency.entity.User;
-import com.emergency.util.EmergencyConstants;
-import com.emergency.util.JsonUtils;
-import com.emergency.util.UserUtil;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import com.emergency.util.SyncUtils;
 
 
-import org.apache.http.Header;
-import org.apache.http.entity.ByteArrayEntity;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class ManageUserFragment extends Fragment implements OnTaskCompleted<ManageUserOut> {
+
+public class ManageUserFragment extends Fragment {
 	private View rootView;
 	private UserManager userManager;
 	private User currentUser;
-	// Progress Dialog Object
-	ProgressDialog prgDialog;
-	// Error Msg TextView Object
-	TextView errorMsg;
+
 	Context context;
 
 	public ManageUserFragment () {
-		userManager = new UserManagerImpl();
-		currentUser = userManager.getUser();
+
 	}
 
 	DateFormat fmtDateAndTime = DateFormat.getDateInstance();
@@ -92,13 +63,8 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
 	                          Bundle savedInstanceState) {
 
 		rootView = inflater.inflate(R.layout.fragment_manage_user, container, false);
-
-		// Instantiate Progress Dialog object
-		prgDialog = new ProgressDialog(getActivity());
-		// Set Progress Dialog Text
-		prgDialog.setMessage("Please wait...");
-		// Set Cancelable as False
-		prgDialog.setCancelable(false);
+		userManager = new UserManagerImpl();
+		currentUser = userManager.getUser();
 		context = getActivity().getApplicationContext();
 		Spinner spinner = (Spinner) rootView.findViewById(R.id.bloodtype_spinner);
 
@@ -114,8 +80,13 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick (View v) {
-
 				updateUser();
+
+				SyncUtils.TriggerRefresh();
+				Toast.makeText(
+						getActivity(),
+						getString(R.string.user_saved),
+						Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -129,154 +100,48 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
 			}
 		});
 
-		if (savedInstanceState == null || !savedInstanceState.getBoolean("edited", true)) {
-			fillUser(currentUser);
-		}
+
+		fillUser(currentUser);
+
 		return rootView;
 	}
 
 	public void updateUser () {
-
-		// Show Progress Dialog
-		prgDialog.show();
-
-		// Make RESTful webservice call using AsyncHttpClient object
-		final AsyncHttpClient client = new AsyncHttpClient();
-		ManageUserIn userIn = getUser();
-		final ObjectMapper mapper = new ObjectMapper();
-
-
-		try {
-			client.post(context, EmergencyConstants.MANAGE_USER_URL, new ByteArrayEntity(mapper.writeValueAsBytes(userIn)), "application/json",
-					new AsyncHttpResponseHandler() {
-						@Override
-						public void onSuccess (int statusCode, Header[] headers, byte[] responseBody) {
-							// Hide Progress Dialog
-							prgDialog.hide();
-							try {
-								if (responseBody != null) {
-									Log.i("com.emergency.emergency", responseBody.toString());
-								}
-								// JSON Object
-								//final JSONObject obj = new JSONObject(new String(responseBody));
-								// When the JSON response has status boolean value
-								// assigned with true
-
-								ManageUserOut out = mapper.readValue(responseBody, ManageUserOut.class);//gson.fromJson(new String(responseBody), ManageUserOut.class);
-								if (out.getAnomalie() == null) {
-									Toast.makeText(getActivity().getApplicationContext(),
-											"sauvegarde effectuée",
-											Toast.LENGTH_LONG).show();
-									// Navigate to Home screen
-									userManager.edit(UserUtil.mapUser(getUser(), (short) 1));
-								}
-								// Else display error message
-								else {
-									errorMsg.setText(out.getAnomalie().getLibelleAnomalie());
-									Toast.makeText(getActivity().getApplicationContext(),
-											errorMsg.getText(),
-											Toast.LENGTH_LONG).show();
-								}
-							} catch (final IOException e) {
-								// TODO Auto-generated catch block
-								Toast.makeText(
-										getActivity().getApplicationContext(),
-										"Error Occured [Server's JSON response might be invalid]!",
-										Toast.LENGTH_LONG).show();
-								e.printStackTrace();
-
-							}
-						}
-
-						@Override
-						public void onFailure (int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-							// Hide Progress Dialog
-							prgDialog.hide();
-							if (responseBody != null) {
-								Log.i("com.emergency.emergency", responseBody.toString());
-							}
-							// When Http response code is '404'
-							if (statusCode == 404) {
-								Toast.makeText(getActivity().getApplicationContext(),
-										"Requested resource not found",
-										Toast.LENGTH_LONG).show();
-							}
-							// When Http response code is '500'
-							else if (statusCode == 500) {
-								Toast.makeText(getActivity().getApplicationContext(),
-										"Something went wrong at server end",
-										Toast.LENGTH_LONG).show();
-							}
-							// When Http response code other than 404, 500
-							else {
-								Toast.makeText(
-										getActivity().getApplicationContext(),
-										"Unexpected Error occcured! [Most common Error: Device might not be connected to Internet or remote server is not up and running]",
-										Toast.LENGTH_LONG).show();
-							}
-						}
-
-					});
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-
+		getUser();
+		userManager.edit(currentUser);
 	}
 
-	public void onTaskCompleted (ManageUserOut manageUserOut) {
-		if (manageUserOut != null && manageUserOut.getAnomalie() == null) {
-			userManager.edit(UserUtil.mapUser(getUser(), (short) 1));
-			Logger.getAnonymousLogger().log(Level.INFO, "userUpdated : ", userManager.getUser());
-		}
-		else {
-			AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-			alertDialog.setTitle("Oops...");
-			alertDialog.setMessage(getResources().getString(R.string.servercall_error));
-			alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-				public void onClick (DialogInterface dialog, int which) {
-					// here you can add functions
-				}
-			});
-			alertDialog.setIcon(R.drawable.ic_communities);
-			alertDialog.show();
-		}
 
-	}
+	private void getUser () {
 
-	@Override
-	public void onPreExecute () {
 
-	}
-
-	private ManageUserIn getUser () {
-		ManageUserIn manageUserIn = new ManageUserIn();
-		manageUserIn.setCodeFonction((short) 1);
-		manageUserIn.setUserDTO(new UserDTO());
-
-		manageUserIn.getUserDTO().setTelephone(String.valueOf((
-				(TextView) rootView.findViewById(R.id.textTelephone)).getText()));
-		manageUserIn.getUserDTO().setNom(String.valueOf((
+		currentUser.setNom(String.valueOf((
 				(TextView) rootView.findViewById(R.id.textNom)).getText()));
-		manageUserIn.getUserDTO().setPrenom(String.valueOf((
+		currentUser.setPrenom(String.valueOf((
 				(TextView) rootView.findViewById(R.id.textprenom)).getText()));
-		manageUserIn.getUserDTO().setDateNaissance(myCalendar.getTime());
-		manageUserIn.getUserDTO().setGroupSanguin((short) ((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).getSelectedItemId());
-		manageUserIn.getUserDTO().setGcmDeviceId(currentUser.getGcmDeviceId());
+		currentUser.setDateNaissance(myCalendar.getTime());
+		currentUser.setGroupSanguin((short) ((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).getSelectedItemId());
+
 		if (((RadioButton) rootView.findViewById(R.id.radiohomme)).isChecked()) {
-			manageUserIn.getUserDTO().setSexe((short) 1);
+			currentUser.setSexe((short) 1);
 		}
 		if (((RadioButton) rootView.findViewById(R.id.radiofemme)).isChecked()) {
-			manageUserIn.getUserDTO().setSexe((short) 2);
+			currentUser.setSexe((short) 2);
 		}
-		manageUserIn.getUserDTO().setAutresInfos(String.valueOf(((EditText) rootView.findViewById(R.id.otherInfo)).getText()));
+
+		currentUser.setDiabete(((CheckBox) rootView.findViewById(R.id.user_check_diabete)).isChecked() ? (short) 1 : 0);
+		currentUser.setCholesterol(((CheckBox) rootView.findViewById(R.id.user_check_cholesterol)).isChecked() ? (short) 1 : 0);
+		currentUser.setAutresInfos(String.valueOf(((EditText) rootView.findViewById(R.id.otherInfo)).getText()));
 		//manageUserIn.getUserDTO().setDateNaissance(String.valueOf(((TextView) findViewById(R.id.textDtNaiss)).getText()));
-		return manageUserIn;
+
+
 	}
 
 	private void fillUser (User user) {
 		((EditText) rootView.findViewById(R.id.textTelephone)).setText(user.getTelephone());
 		((EditText) rootView.findViewById(R.id.textNom)).setText(user.getNom());
 		((EditText) rootView.findViewById(R.id.textprenom)).setText(user.getPrenom());
+		((EditText) rootView.findViewById(R.id.otherInfo)).setText(user.getAutresInfos());
 		if (user.getDateNaissance() != null) {
 			myCalendar.setTime(user.getDateNaissance());
 			//((EditText) rootView.findViewById(R.id.textDtNaiss)).setText(user.getDateNaissance().toString());
@@ -292,10 +157,14 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
 		//   case (short)1 :
 		((Spinner) rootView.findViewById(R.id.bloodtype_spinner)).setSelection(user.getGroupSanguin());
 
+		((CheckBox) rootView.findViewById(R.id.user_check_cholesterol)).setChecked(currentUser.getCholesterol() == 1);
+		((CheckBox) rootView.findViewById(R.id.user_check_diabete)).setChecked(currentUser.getDiabete() == 1);
+
 	}
 
 	@Override
-	public void onSaveInstanceState (Bundle outState) {super.onSaveInstanceState(outState);
+	public void onSaveInstanceState (Bundle outState) {
+		super.onSaveInstanceState(outState);
 		outState.putBoolean("edited", true);
 	}
 
@@ -309,4 +178,6 @@ public class ManageUserFragment extends Fragment implements OnTaskCompleted<Mana
 	public void onResume () {
 		super.onResume();
 	}
+
+
 }

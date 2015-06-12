@@ -54,14 +54,28 @@ public class User extends SugarRecord<User> {
 	private String prenom;
 	private short sexe;
 	private String gcmDeviceId;
+	private Date syncTime;
+	private Date lastChanged;
 
+	public Date getLastChanged () {
+		return lastChanged;
+	}
 
-	@Ignore
-	private List<RecepteursSituation> recepteursSituations;
+	public void setLastChanged (Date lastChanged) {
+		this.lastChanged = lastChanged;
+	}
+
+	public Date getSyncTime () {
+		return syncTime;
+	}
+
+	public void setSyncTime (Date syncTime) {
+		this.syncTime = syncTime;
+	}
+
 	@Ignore
 	private List<Situation> situations;
-	@Ignore
-	private List<SuiviAlerte> suiviAlertes;
+
 	private long digitsId;
 
 	public long getDigitsId () {
@@ -73,7 +87,8 @@ public class User extends SugarRecord<User> {
 	}
 
 	public User () {
-		Calendar cal = Calendar.getInstance();cal.set(2001,1,1);
+		Calendar cal = Calendar.getInstance();
+		cal.set(2001, 1, 1);
 		this.dateNaissance = cal.getTime();
 	}
 
@@ -111,12 +126,6 @@ public class User extends SugarRecord<User> {
 		this.gcmDeviceId = gcmDeviceId;
 	}
 
-	// public short getMe() {
-	//   return this.me;
-	// }
-	//public void setMe(short me) {
-	//    this.me = me;
-	//}
 	public String getTelephone () {
 		return this.telephone;
 	}
@@ -190,27 +199,6 @@ public class User extends SugarRecord<User> {
 		this.sexe = sexe;
 	}
 
-	public List<RecepteursSituation> getRecepteursSituations () {
-		return this.recepteursSituations;
-	}
-
-	public void setRecepteursSituations (List<RecepteursSituation> recepteursSituations) {
-		this.recepteursSituations = recepteursSituations;
-	}
-
-	public RecepteursSituation addRecepteursSituation (RecepteursSituation recepteursSituation) {
-		getRecepteursSituations().add(recepteursSituation);
-		recepteursSituation.setUser(this);
-
-		return recepteursSituation;
-	}
-
-	public RecepteursSituation removeRecepteursSituation (RecepteursSituation recepteursSituation) {
-		getRecepteursSituations().remove(recepteursSituation);
-		recepteursSituation.setUser(null);
-
-		return recepteursSituation;
-	}
 
 	public List<Situation> getSituations () {
 		return this.situations;
@@ -234,26 +222,6 @@ public class User extends SugarRecord<User> {
 		return situation;
 	}
 
-	public List<SuiviAlerte> getSuiviAlertes () {
-		return this.suiviAlertes;
-	}
 
-	public void setSuiviAlertes (List<SuiviAlerte> suiviAlertes) {
-		this.suiviAlertes = suiviAlertes;
-	}
-
-	public SuiviAlerte addSuiviAlerte (SuiviAlerte suiviAlerte) {
-		getSuiviAlertes().add(suiviAlerte);
-		suiviAlerte.setUser(this);
-
-		return suiviAlerte;
-	}
-
-	public SuiviAlerte removeSuiviAlerte (SuiviAlerte suiviAlerte) {
-		getSuiviAlertes().remove(suiviAlerte);
-		suiviAlerte.setUser(null);
-
-		return suiviAlerte;
-	}
 
 }

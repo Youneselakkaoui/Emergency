@@ -19,6 +19,16 @@ public class AlerteRecue extends SugarRecord<AlerteRecue> {
 
 	private short statut;
 
+	private boolean lue;
+
+	public boolean isLue () {
+		return lue;
+	}
+
+	public void setLue (boolean alerteLue) {
+		this.lue = alerteLue;
+	}
+
 	public SituationRecue getSituation () {
 		return situation;
 	}

@@ -8,14 +8,14 @@ import java.util.List;
  * Created by Noureddine on 18/04/2015.
  */
 public interface SituationManager {
-    public boolean add(Situation s);
+	boolean add (Situation s);
 
-    public Situation getById(int id);
+	Situation getById (int id);
 
-    public List<Situation> getAll();
+	List<Situation> getAll ();
 
-    public boolean edit(Situation s);
+	boolean edit (Situation s);
 
-    public void remove(int id);
+	void remove (Situation s);
 
 }

@@ -25,11 +25,11 @@ public class AlerteDTO extends EmergencyDTO implements Serializable  {
 
     private short statut;
 
-    private Situation situation;
+    private SituationDTO situation;
 
     private List<PieceJointe> pieceJointes;
 
-    private List<SuiviAlerte> suiviAlertes;
+//    private List<SuiviAlerte> suiviAlertes;
 
     public AlerteDTO() {
     }
@@ -74,11 +74,11 @@ public class AlerteDTO extends EmergencyDTO implements Serializable  {
         this.statut = statut;
     }
 
-    public Situation getSituation() {
+    public SituationDTO getSituation() {
         return this.situation;
     }
 
-    public void setSituation(Situation situation) {
+    public void setSituation(SituationDTO situation) {
         this.situation = situation;
     }
 
@@ -104,27 +104,27 @@ public class AlerteDTO extends EmergencyDTO implements Serializable  {
         return pieceJointe;
     }
 
-    public List<SuiviAlerte> getSuiviAlertes() {
-        return this.suiviAlertes;
-    }
-
-    public void setSuiviAlertes(List<SuiviAlerte> suiviAlertes) {
-        this.suiviAlertes = suiviAlertes;
-    }
-
-    public SuiviAlerte addSuiviAlerte(SuiviAlerte suiviAlerte) {
-        getSuiviAlertes().add(suiviAlerte);
-        suiviAlerte.setAlerte(this);
-
-        return suiviAlerte;
-    }
-
-    public SuiviAlerte removeSuiviAlerte(SuiviAlerte suiviAlerte) {
-        getSuiviAlertes().remove(suiviAlerte);
-        suiviAlerte.setAlerte(null);
-
-        return suiviAlerte;
-    }
+//    public List<SuiviAlerte> getSuiviAlertes() {
+//        return this.suiviAlertes;
+//    }
+//
+//    public void setSuiviAlertes(List<SuiviAlerte> suiviAlertes) {
+//        this.suiviAlertes = suiviAlertes;
+//    }
+//
+//    public SuiviAlerte addSuiviAlerte(SuiviAlerte suiviAlerte) {
+//        getSuiviAlertes().add(suiviAlerte);
+//        suiviAlerte.setAlerte(this);
+//
+//        return suiviAlerte;
+//    }
+//
+//    public SuiviAlerte removeSuiviAlerte(SuiviAlerte suiviAlerte) {
+//        getSuiviAlertes().remove(suiviAlerte);
+//        suiviAlerte.setAlerte(null);
+//
+//        return suiviAlerte;
+//    }
 
 
 }
